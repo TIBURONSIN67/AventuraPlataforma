@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0e27836xgmhi"]
+
+[ext_resource type="PackedScene" uid="uid://xy8rvnjp22n5" path="res://models/World/character.glb" id="1_vn7w5"]
+
+[node name="Character" instance=ExtResource("1_vn7w5")]
+
+[node name="root" parent="character" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0529858, 9.02389e-17)
+
+[node name="leg-left" parent="character/root" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.94606, 0.323991, 0, -0.323991, 0.94606, 0.125, 0.183668, 0.0215686)
+
+[node name="leg-right" parent="character/root" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.94606, -0.323991, 0, 0.323991, 0.94606, -0.125, 0.183169, -0.0701906)
+
+[node name="torso" parent="character/root" index="2"]
+transform = Transform3D(0.99979, 0.000511783, -0.0205068, -6.54972e-05, 0.999762, 0.0217575, 0.0205131, -0.0217516, 0.999552, -1.80478e-15, 0.17625, -0.02375)
+
+[node name="arm-left" parent="character/root/torso" index="0"]
+transform = Transform3D(0.844646, 0.535015, 0.0182019, -0.535016, 0.844826, -0.0052513, -0.018187, -0.00530282, 0.999821, 0.3, 0.175, 0)
+
+[node name="arm-right" parent="character/root/torso" index="1"]
+transform = Transform3D(0.844646, -0.535015, -0.0182019, 0.535016, 0.844826, -0.0052513, 0.018187, -0.00530282, 0.999821, -0.3, 0.1195, 0)
+
+[node name="antenna" parent="character/root/torso" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.999093, 0.0425569, 0, -0.0425569, 0.999093, 0, 0.6, 0)
+
+[node name="AnimationPlayer" parent="." index="1"]
+deterministic = true
+playback_default_blend_time = 0.2

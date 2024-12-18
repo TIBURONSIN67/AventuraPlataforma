@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwotf35tu4lvi"]
+
+[ext_resource type="PackedScene" uid="uid://dfm6jtvlfqk6o" path="res://models/items/Llave.glb" id="1_3qif4"]
+[ext_resource type="Script" path="res://scenes/itemsScene/door_key.gd" id="1_saq0r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4fsun"]
+size = Vector3(0.367401, 0.0997926, 0.844147)
+
+[node name="DoorKey" type="Area3D"]
+collision_mask = 2
+script = ExtResource("1_saq0r")
+
+[node name="Llave" parent="." instance=ExtResource("1_3qif4")]
+transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, 0.2, 0, -0.2, -8.74228e-09, 0, 0.238721, -0.00230094)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0024872, 0, 1.04774e-08)
+shape = SubResource("BoxShape3D_4fsun")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

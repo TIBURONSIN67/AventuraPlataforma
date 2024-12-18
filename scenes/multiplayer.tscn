@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://eu1nkiv6ajbq"]
+
+[ext_resource type="Script" path="res://multiplayer.gd" id="1_et784"]
+
+[node name="Multiplayer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_et784")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -193.0
+offset_right = 105.0
+offset_bottom = 193.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button1Players" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "1 Jugador"
+
+[node name="Button2Players" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "2 Jugadores"
+
+[node name="Button3Players" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "3 Jugadores"
+
+[node name="Button4Players" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "4 Jugadores"
+
+[connection signal="button_up" from="VBoxContainer/Button1Players" to="." method="_on_button_1_player_pressed"]
+[connection signal="button_up" from="VBoxContainer/Button2Players" to="." method="_on_button_2_players_pressed"]
+[connection signal="button_up" from="VBoxContainer/Button3Players" to="." method="_on_button_3_players_pressed"]
+[connection signal="button_up" from="VBoxContainer/Button4Players" to="." method="_on_button_4_players_pressed"]

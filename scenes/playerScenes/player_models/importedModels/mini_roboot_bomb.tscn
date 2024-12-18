@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bowycnhpj1g8g"]
+
+[ext_resource type="PackedScene" uid="uid://bqaa68of2u7g0" path="res://models/mini_roboot/mini_roboot_bomb.glb" id="1_bjwh5"]
+
+[node name="mini_roboot_bomb" instance=ExtResource("1_bjwh5")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(-0.00947341, 0.341585, -0.0185534)
+bones/0/rotation = Quaternion(0.721312, 8.5987e-08, -8.25657e-08, 0.692611)
+bones/1/rotation = Quaternion(-0.0405806, -1.04919e-14, -9.67518e-09, 0.999176)
+bones/3/rotation = Quaternion(0.0485494, 0.000177966, 0.00898769, 0.99878)
+bones/4/position = Vector3(0.401541, 0.221775, 0.000574467)
+bones/4/rotation = Quaternion(-0.0268963, -0.662015, 0.0406418, 0.747905)
+bones/5/position = Vector3(0.1276, -0.0526445, -0.0226471)
+bones/5/rotation = Quaternion(-4.9542e-05, 0.0111143, 0.999937, 0.00171192)
+bones/6/position = Vector3(-0.112324, -0.0526445, -0.0226472)
+bones/6/rotation = Quaternion(-4.96017e-05, 0.0111143, 0.999937, 0.00171198)
+bones/7/position = Vector3(-0.395865, 0.206734, -0.00498005)
+bones/7/rotation = Quaternion(-0.0186933, 0.686138, -0.0353202, 0.726373)

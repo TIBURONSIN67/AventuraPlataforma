@@ -1,0 +1,202 @@
+[gd_scene load_steps=20 format=3 uid="uid://c8mvix6qkkkkt"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_o7etr"]
+[ext_resource type="ArrayMesh" uid="uid://deu06eho4c74" path="res://meshes/dust.res" id="2_vgoge"]
+[ext_resource type="AudioStream" uid="uid://cydjn1ct3hps2" path="res://sounds/walking.ogg" id="3_62qsc"]
+[ext_resource type="PackedScene" uid="uid://bqaa68of2u7g0" path="res://models/mini_roboot/mini_roboot_bomb.glb" id="5_ufi6h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7stj"]
+diffuse_mode = 2
+specular_mode = 2
+metallic_specular = 0.0
+backlight = Color(0, 0.521569, 0.709804, 1)
+billboard_keep_scale = true
+grow_amount = 1.882
+proximity_fade_distance = 0.25
+
+[sub_resource type="Curve" id="Curve_xh1e2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.249284, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kge75"]
+size = Vector3(0.592224, 0.950928, 0.669067)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vj8gm"]
+size = Vector3(0.598907, 0.65387, 0.942902)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e74ww"]
+size = Vector3(0.125702, 0.510871, 0.274662)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4i530"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_negte"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ypqvj"]
+animation = &"DoubleJump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0p18e"]
+animation = &"Shoot"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_spbgv"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_2dl53"]
+filter_enabled = true
+filters = ["Armature/Skeleton3D:Brazo L", "Armature/Skeleton3D:Brazo R"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mct2d"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ijw8l"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_keo6w"]
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Jump"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+input_3/name = "DoubleJump"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v80rv"]
+graph_offset = Vector2(20, 336)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_spbgv")
+nodes/Animation/position = Vector2(-80, 80)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_4i530")
+"nodes/Animation 2/position" = Vector2(-80, 208)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_negte")
+"nodes/Animation 3/position" = Vector2(-80, 336)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_ypqvj")
+"nodes/Animation 4/position" = Vector2(-80, 464)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_0p18e")
+"nodes/Animation 5/position" = Vector2(192, 496)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_2dl53")
+nodes/OneShot/position = Vector2(512, 288)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ijw8l")
+nodes/TimeScale/position = Vector2(64, 224)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_mct2d")
+"nodes/TimeScale 2/position" = Vector2(368, 464)
+nodes/Transition/node = SubResource("AnimationNodeTransition_keo6w")
+nodes/Transition/position = Vector2(304, 208)
+nodes/output/position = Vector2(688, 256)
+node_connections = [&"OneShot", 0, &"Transition", &"OneShot", 1, &"TimeScale 2", &"TimeScale", 0, &"Animation 2", &"TimeScale 2", 0, &"Animation 5", &"Transition", 0, &"Animation", &"Transition", 1, &"TimeScale", &"Transition", 2, &"Animation 3", &"Transition", 3, &"Animation 4", &"output", 0, &"OneShot"]
+
+[node name="RobootBomb" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 2
+script = ExtResource("1_o7etr")
+
+[node name="ParticlesTrail" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.507354, 0)
+material_override = SubResource("StandardMaterial3D_q7stj")
+cast_shadow = 0
+emitting = false
+amount = 60
+mesh = ExtResource("2_vgoge")
+emission_shape = 1
+emission_sphere_radius = 0.3
+particle_flag_align_y = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0.1, 0)
+scale_amount_min = 0.75
+scale_amount_curve = SubResource("Curve_xh1e2")
+
+[node name="SoundFootsteps" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_62qsc")
+volume_db = -5.0
+pitch_scale = 1.25
+autoplay = true
+
+[node name="StandingShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0226466, 0.0540317)
+shape = SubResource("BoxShape3D_kge75")
+
+[node name="FlippedShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00468445, -0.293377, 0.26058)
+shape = SubResource("BoxShape3D_vj8gm")
+disabled = true
+
+[node name="StandingGunzLShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.977058, 0.185526, -0.104574, -0.191583, 0.551229, -0.812061, -0.0930143, 0.813466, 0.574127, 0.407795, 0.0714785, 0.0912499)
+shape = SubResource("BoxShape3D_e74ww")
+
+[node name="StandingGunzRShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.984784, -0.0420884, 0.168608, 0.161037, 0.585709, -0.794362, -0.0653217, 0.809427, 0.583575, -0.420972, 0.0466434, 0.100823)
+shape = SubResource("BoxShape3D_e74ww")
+
+[node name="FlippedGunzLShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.973035, 0.194148, -0.124537, -0.136596, 0.0499633, -0.989366, -0.185861, 0.979699, 0.0751355, 0.389773, -0.213731, 0.352104)
+shape = SubResource("BoxShape3D_e74ww")
+disabled = true
+
+[node name="FlippedGunzRShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.996441, -0.0675236, 0.0504669, 0.057214, 0.102038, -0.993134, 0.0619104, 0.992487, 0.105538, -0.42875, -0.211052, 0.372828)
+shape = SubResource("BoxShape3D_e74ww")
+disabled = true
+
+[node name="Character" parent="." instance=ExtResource("5_ufi6h")]
+
+[node name="Skeleton3D" parent="Character/Armature" index="0"]
+bones/1/rotation = Quaternion(-0.069051, 2.75833e-10, -9.67124e-09, 0.997613)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/position = Vector3(0.00921026, 0.291152, 0.0097932)
+bones/2/rotation = Quaternion(0.0117232, -9.24648e-09, 3.23774e-10, 0.999931)
+bones/3/rotation = Quaternion(0.008796, 0.000535229, 0.0089735, 0.999921)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/position = Vector3(0.402076, 0.210617, 0.0060551)
+bones/4/rotation = Quaternion(0.261388, -0.613627, -0.387538, 0.636359)
+bones/4/scale = Vector3(1, 1, 1)
+bones/5/position = Vector3(0.1276, -0.0494025, 0.0571805)
+bones/5/rotation = Quaternion(-0.000228723, 0.115873, 0.993263, 0.00169732)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/position = Vector3(-0.112324, -0.0547436, -0.0743301)
+bones/6/rotation = Quaternion(0.000142456, -0.100952, 0.99489, 0.00170674)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/position = Vector3(-0.395031, 0.211094, -0.0101398)
+bones/7/rotation = Quaternion(0.298896, 0.665737, 0.364909, 0.578185)
+
+[node name="Bomba_Cabeza" parent="Character/Armature/Skeleton3D" index="0"]
+layers = 2
+
+[node name="Cuerpo" parent="Character/Armature/Skeleton3D" index="1"]
+layers = 2
+
+[node name="Patas_L" parent="Character/Armature/Skeleton3D" index="4"]
+layers = 2
+
+[node name="Patas_R" parent="Character/Armature/Skeleton3D" index="5"]
+layers = 2
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Character")
+tree_root = SubResource("AnimationNodeBlendTree_v80rv")
+anim_player = NodePath("../Character/AnimationPlayer")
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+parameters/TimeScale/scale = 1.5
+"parameters/TimeScale 2/scale" = 1.5
+parameters/Transition/current_state = "Run"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 1
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, 10)
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 0, -0.176158)
+
+[node name="View" type="Camera3D" parent="Head"]
+cull_mask = 1048573
+
+[editable path="Character"]

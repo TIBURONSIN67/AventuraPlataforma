@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://dl2ed4gkybggf"]
+
+[ext_resource type="Texture2D" uid="uid://8ggihh27mlrr" path="res://sprites/blob_shadow.png" id="1_bxe4v"]
+[ext_resource type="ArrayMesh" uid="uid://deu06eho4c74" path="res://models/mini_roboot/meshes/dust.res" id="2_sw2q0"]
+[ext_resource type="AudioStream" uid="uid://cydjn1ct3hps2" path="res://sounds/walking.ogg" id="3_w84vn"]
+[ext_resource type="PackedScene" uid="uid://1wjjwr0w826e" path="res://models/mini_roboot/mini_roboot.glb" id="4_6vpj4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gdq8c"]
+radius = 0.3
+height = 1.09827
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7stj"]
+diffuse_mode = 2
+specular_mode = 2
+metallic_specular = 0.0
+backlight = Color(0, 0.521569, 0.709804, 1)
+billboard_keep_scale = true
+grow_amount = 1.882
+proximity_fade_distance = 0.25
+
+[sub_resource type="Curve" id="Curve_xh1e2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.249284, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="roboot_p" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("CapsuleShape3D_gdq8c")
+
+[node name="Shadow" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+size = Vector3(1, 2, 1)
+texture_albedo = ExtResource("1_bxe4v")
+modulate = Color(1, 1, 1, 0.705882)
+normal_fade = 0.5
+
+[node name="ParticlesTrail" type="CPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_q7stj")
+cast_shadow = 0
+emitting = false
+amount = 60
+mesh = ExtResource("2_sw2q0")
+emission_shape = 1
+emission_sphere_radius = 0.3
+particle_flag_align_y = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0.1, 0)
+scale_amount_min = 0.75
+scale_amount_curve = SubResource("Curve_xh1e2")
+
+[node name="SoundFootsteps" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_w84vn")
+volume_db = -5.0
+pitch_scale = 1.25
+autoplay = true
+
+[node name="Character" parent="." instance=ExtResource("4_6vpj4")]
