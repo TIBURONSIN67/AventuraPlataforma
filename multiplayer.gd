@@ -5,7 +5,7 @@ const MAIN = preload("res://scenes/main.tscn")
 func _ready():
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 	
 func _on_button_1_player_pressed():

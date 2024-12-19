@@ -2,7 +2,7 @@ extends Control
 
 @onready var canvas_layer: CanvasLayer = $Pause
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause"):
 		get_tree().paused = not get_tree().paused
 		canvas_layer.visible = not canvas_layer.visible

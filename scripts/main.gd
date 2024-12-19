@@ -1,7 +1,7 @@
 extends Node3D
 
-var player_scene1:PackedScene = preload("res://Scenes/playerScenes/player_1.tscn")
-var player_scene2:PackedScene = preload("res://Scenes/playerScenes/player_2.tscn")
+var player_scene1:PackedScene = preload("res://scenes/playerScenes/player_1.tscn")
+var player_scene2:PackedScene = preload("res://scenes/playerScenes/player_2.tscn")
 var player_scene3:PackedScene = preload("res://scenes/playerScenes/player_3.tscn")
 const _1_PLAYERS_VIEW = preload("res://scenes/viewScene/1PlayerView.tscn")
 const _2_PLAYERS_VIEW = preload("res://scenes/viewScene/2PlayersView.tscn")

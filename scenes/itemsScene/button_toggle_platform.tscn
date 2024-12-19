@@ -82,7 +82,6 @@ input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_umf0t"]
-graph_offset = Vector2(-349.865, 116.889)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_n5e6i")
 nodes/Animation/position = Vector2(-64, 144)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_bqvgw")
@@ -92,7 +91,6 @@ nodes/Transition/position = Vector2(144, 160)
 node_connections = [&"Transition", 0, &"Animation", &"Transition", 1, &"Animation 2", &"output", 0, &"Transition"]
 
 [node name="ButtonTogglePlatform" type="Node3D"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 script = ExtResource("1_eefly")
 
 [node name="Botton" type="StaticBody3D" parent="."]

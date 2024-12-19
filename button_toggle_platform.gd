@@ -9,7 +9,7 @@ var is_active:bool = false
 var is_not_pressed_animation_finished: bool = true
 var is_pressed_animation_finished: bool = true
 var on_body:bool = false
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (
 		on_body and
 		current_state == "NotPressed" and 
@@ -29,12 +29,12 @@ func _process(delta: float) -> void:
 		is_active = false
 		is_not_pressed_animation_finished = false
 
-func _on_area_3d_body_entered(body: Node3D) -> void:
+func _on_area_3d_body_entered(_body: Node3D) -> void:
 	on_body = true
 
  # Emite la señal con el nuevo estado
 	
-func _on_area_3d_body_exited(body: Node3D) -> void:
+func _on_area_3d_body_exited(_body: Node3D) -> void:
 	on_body = false
 
 

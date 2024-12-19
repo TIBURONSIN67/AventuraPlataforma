@@ -71,7 +71,7 @@ func _ready() -> void:
 	gravity = defalut_gravity
 	
 # Functions
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	pass
 var speed_factor:float
 var horizontal_velocity:Vector2
@@ -134,7 +134,7 @@ func change_anim_move_state(new_state: String) -> void:
 		#animation_tree.set("parameters/Shoot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 		#
 		
-func handle_effects(delta):
+func handle_effects(_delta):
 	particles_trail.emitting = false
 	sound_footsteps.stream_paused = true
 
@@ -168,7 +168,7 @@ func collect_coin():
 	coin_collected.emit(coins)
 	
 # Ejemplo de estado Idle
-func _idle_state(delta: float) -> void:
+func _idle_state(_delta: float) -> void:
 	check_mele_atack_input()
 	input_keyboard = Vector2.ZERO
 	jump_single = false
@@ -261,7 +261,7 @@ func change_state(new_state: String) -> void:
 	exit_state(current_state)
 	current_state = new_state
 	
-func exit_state(state: String) -> void:
+func exit_state(_state: String) -> void:
 	#limpiar estados
 #	match state:
 #		"Idle":

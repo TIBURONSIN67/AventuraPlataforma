@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cxtcmsa6gtfan"]
 
 [ext_resource type="Script" path="res://scenes/itemsScene/mobile_platform.gd" id="1_45iga"]
-[ext_resource type="PackedScene" uid="uid://clr7kod2vm86t" path="res://models/items/PlataformaMovil.glb" id="1_hq82v"]
+[ext_resource type="PackedScene" uid="uid://clr7kod2vm86t" path="res://models/World/items/PlataformaMovil.glb" id="1_hq82v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d1bv2"]
 size = Vector3(0.59581, 0.0855103, 0.562378)
@@ -10,7 +10,6 @@ size = Vector3(0.59581, 0.0855103, 0.562378)
 size = Vector3(0.212769, 0.155823, 1.00049)
 
 [node name="MobilePlatform" type="Node3D"]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 script = ExtResource("1_45iga")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
