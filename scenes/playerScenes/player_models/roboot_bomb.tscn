@@ -31,12 +31,14 @@ animation = &"jump"
 animation = &"fall"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f44rd"]
-animation = &"holding-right-shoot"
+animation = &"attack-melee-right"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_spbgv"]
 animation = &"idle"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_6gurf"]
+filter_enabled = true
+filters = ["character-male-c/Skeleton3D:arm-left", "character-male-c/Skeleton3D:arm-right", "character-male-c/Skeleton3D:head", "character-male-c/Skeleton3D:root", "character-male-c/Skeleton3D:torso"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ijw8l"]
 
@@ -59,7 +61,7 @@ input_3/break_loop_at_end = false
 input_3/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v80rv"]
-graph_offset = Vector2(-276.94, 20.0546)
+graph_offset = Vector2(-150.778, 112.556)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_spbgv")
 nodes/Animation/position = Vector2(0, 0)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_4i530")
@@ -70,14 +72,14 @@ nodes/Animation/position = Vector2(0, 0)
 "nodes/Animation 4/position" = Vector2(-96, 448)
 "nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_f44rd")
 "nodes/Animation 5/position" = Vector2(304, 464)
-nodes/OneShot/node = SubResource("AnimationNodeOneShot_6gurf")
-nodes/OneShot/position = Vector2(544, 240)
+nodes/Mele/node = SubResource("AnimationNodeOneShot_6gurf")
+nodes/Mele/position = Vector2(544, 240)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ijw8l")
 nodes/TimeScale/position = Vector2(64, 144)
 nodes/Transition/node = SubResource("AnimationNodeTransition_keo6w")
 nodes/Transition/position = Vector2(304, 208)
 nodes/output/position = Vector2(752, 288)
-node_connections = [&"OneShot", 0, &"Transition", &"OneShot", 1, &"Animation 5", &"TimeScale", 0, &"Animation 2", &"Transition", 0, &"Animation", &"Transition", 1, &"TimeScale", &"Transition", 2, &"Animation 3", &"Transition", 3, &"Animation 4", &"output", 0, &"OneShot"]
+node_connections = [&"Mele", 0, &"Transition", &"Mele", 1, &"Animation 5", &"TimeScale", 0, &"Animation 2", &"Transition", 0, &"Animation", &"Transition", 1, &"TimeScale", &"Transition", 2, &"Animation 3", &"Transition", 3, &"Animation 4", &"output", 0, &"Mele"]
 
 [node name="RobootBomb" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -112,9 +114,9 @@ shape = SubResource("BoxShape3D_kge75")
 root_node = NodePath("../Character")
 tree_root = SubResource("AnimationNodeBlendTree_v80rv")
 anim_player = NodePath("../Character/AnimationPlayer")
-parameters/OneShot/active = false
-parameters/OneShot/internal_active = false
-parameters/OneShot/request = 0
+parameters/Mele/active = false
+parameters/Mele/internal_active = false
+parameters/Mele/request = 0
 parameters/TimeScale/scale = 1.5
 parameters/Transition/current_state = "Idle"
 parameters/Transition/transition_request = ""
@@ -124,13 +126,13 @@ parameters/Transition/current_index = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501087, 0)
 
 [node name="Skeleton3D" parent="Character/character-male-c" index="0"]
-bones/3/rotation = Quaternion(0.0212941, 0, 0, 0.999773)
-bones/4/rotation = Quaternion(0, 0, -0.322919, 0.946427)
-bones/5/rotation = Quaternion(0, 0, 0.322919, 0.946427)
-bones/6/rotation = Quaternion(0, -0.0212941, 0, 0.999773)
+bones/3/rotation = Quaternion(-0.00174525, 0, 0, 0.999999)
+bones/4/rotation = Quaternion(0, 0, -0.377841, 0.92587)
+bones/5/rotation = Quaternion(0, 0, 0.377841, 0.92587)
+bones/6/rotation = Quaternion(0, 0.00174525, 0, 0.999999)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Character/character-male-c/Skeleton3D" index="2"]
-transform = Transform3D(0.791447, -0.611238, 0, 0.610684, 0.790729, -0.0425786, 0.0260257, 0.0336987, 0.999093, -0.0998968, 0.287159, -0.0125129)
+transform = Transform3D(0.714472, -0.699664, 0, 0.699659, 0.714468, 0.00349049, -0.00244217, -0.00249386, 0.999994, -0.0998968, 0.287789, -0.0176393)
 bone_name = "arm-right"
 bone_idx = 5
 

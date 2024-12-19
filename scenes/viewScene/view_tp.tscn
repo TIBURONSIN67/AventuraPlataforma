@@ -1,14 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://drj8yyl38l8co"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ujybo"]
+[gd_scene format=3 uid="uid://drj8yyl38l8co"]
 
 [node name="ViewTp" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 transform = Transform3D(-1, 0, 2.62268e-07, 0, 1, -2.98023e-08, -2.62268e-07, 0, -1, -0.7, 0.2, -2)
-shape = SubResource("BoxShape3D_ujybo")
-margin = 0.5
+spring_length = 10.0
 
 [node name="Camera" type="Camera3D" parent="SpringArm3D"]
 current = true

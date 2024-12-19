@@ -65,7 +65,7 @@ func handle_input(delta):
 	keyboard_input.x = Input.get_axis(move_up, move_down)
 	
 	camera_rotation -= keyboard_input.limit_length(1.0) * keyboard_rotation_speed * delta
-	camera_rotation.x = clamp(camera_rotation.x, -5, 80)
+	camera_rotation.x = clamp(camera_rotation.x, 15, 80)
 	# Zooming
 	
 	zoom += zoom_direction * zoom_speed * delta

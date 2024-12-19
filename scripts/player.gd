@@ -23,15 +23,7 @@ var defalut_gravity = 23
 var double_jump_gravity = 17
 #shoot
 @export_subgroup("Oters")
-@export var bullet_scene : PackedScene  
-var pivot_l : Marker3D   
-var pivot_r : Marker3D 
-var camera: Camera3D
-var direction1 : Vector3
-var direction2 : Vector3
-var bullet1: RigidBody3D
-var bullet2: RigidBody3D
-@export var bullet_speed: float = 50
+var is_mele_atack = false
 
 #INPUT
 var input:Vector3 = Vector3.ZERO
@@ -76,10 +68,7 @@ var states = {
 var current_state: String  = "Idle" # Estado inicial
 var current_animation_state: String 
 func _ready() -> void:
-	#gunz_a_l.visible = false
-	#gunz_a_r.visible = false
 	gravity = defalut_gravity
-	camera = view.get_node("SpringArm3D/Camera")
 	
 # Functions
 func _input(event: InputEvent) -> void:
@@ -101,9 +90,14 @@ func _physics_process(delta: float)->void:
 	# Rotation
 
 	applied_velocity = velocity.lerp(movement_velocity, delta * 10)
-	
-	velocity.x = applied_velocity.x
-	velocity.z = applied_velocity.z
+
+	if not is_mele_atack:
+		velocity.x = applied_velocity.x
+		velocity.z = applied_velocity.z
+	elif  is_mele_atack:
+		velocity.x = applied_velocity.x * 95 / 100
+		velocity.z = applied_velocity.z * 95 / 100
+		
 	velocity.y -= gravity * delta
 	move_and_slide()
 
@@ -175,6 +169,7 @@ func collect_coin():
 	
 # Ejemplo de estado Idle
 func _idle_state(delta: float) -> void:
+	check_mele_atack_input()
 	input_keyboard = Vector2.ZERO
 	jump_single = false
 	jump_double = false
@@ -192,6 +187,7 @@ func _idle_state(delta: float) -> void:
 		
 
 func _run_state(delta: float) -> void:
+	check_mele_atack_input()
 	check_player_move_input(delta) #aseguramos primero verificar las entradas 
 	#del teclado antes de cambiar de estado
 	# Revisar si se ha dejado de presionar alguna tecla de movimiento
@@ -210,6 +206,7 @@ func _run_state(delta: float) -> void:
 		change_state("Idle")
 		
 func _walk_state(delta: float) -> void:
+	check_mele_atack_input()
 	check_player_move_input(delta) #aseguramos primero verificar las entradas 
 	#del teclado antes de cambiar de estado
 	# Revisar si se ha dejado de presionar alguna tecla de movimiento
@@ -228,6 +225,7 @@ func _walk_state(delta: float) -> void:
 		change_state("Idle")
 		
 func _jump_state(delta: float)-> void:
+	check_mele_atack_input()
 	check_player_move_input(delta)
 	if not jump_single and is_on_floor():
 		Audio.play("res://sounds/jump.ogg")
@@ -244,6 +242,7 @@ func _jump_state(delta: float)-> void:
 		
 func _fall_state(delta: float)->void:
 	check_player_move_input(delta)
+	check_mele_atack_input()
 	change_anim_move_state("Fall")
 	#animacion al caer se escala en todos los ejese
 	#se reproduce el sodido cuando toca el piso
@@ -279,12 +278,12 @@ func exit_state(state: String) -> void:
 
 func check_player_move_input(delta):
 	"""FUNCION PARA GESTIONAR LAS ENTRADAS DEL TECLADO"""
-	if Input.is_action_pressed(move_left):
-		rotation.y = lerp_angle(rotation.y, (view.rotation.y + deg_to_rad(90)), delta * 10)
-		input_keyboard.x = 1
-	elif Input.is_action_pressed(move_right):
+	if Input.is_action_pressed(move_right):
 		rotation.y = lerp_angle(rotation.y, (view.rotation.y - deg_to_rad(90)), delta * 10)
 		input_keyboard.x = -1
+	elif Input.is_action_pressed(move_left):
+		rotation.y = lerp_angle(rotation.y, (view.rotation.y + deg_to_rad(90)), delta * 10)
+		input_keyboard.x = 1
 	if Input.is_action_pressed(move_forward):
 		rotation.y = lerp_angle(rotation.y, view.rotation.y, delta * 10)
 		input_keyboard.y = 1
@@ -302,4 +301,18 @@ func check_player_move_input(delta):
 
 func collect_door_key():
 	print("llaves")
- 
+
+func check_mele_atack_input():
+	if Input.is_action_pressed("Mele"):
+		play_anim_mele_atack()
+		is_mele_atack = true
+	if Input.is_action_just_released("Mele"):
+		is_mele_atack = false
+		
+func play_anim_mele_atack():
+	if not animation_tree.get("parameters/Mele/active"):
+		animation_tree.set("parameters/Mele/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		
+func stop_mele_atack_anim() -> void:
+	if animation_tree.get("parameters/Mele/active"):
+		animation_tree.set("parameters/Mele/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
