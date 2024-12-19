@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://btpqds46mdsl2"]
 
 [ext_resource type="PackedScene" uid="uid://c8mvix6qkkkkt" path="res://scenes/playerScenes/player_models/roboot_bomb.tscn" id="1_kofne"]
-[ext_resource type="PackedScene" uid="uid://drj8yyl38l8co" path="res://scenes/CamraOrvit.tscn" id="2_0ixeb"]
+[ext_resource type="PackedScene" uid="uid://drj8yyl38l8co" path="res://scenes/viewScene/view_tp.tscn" id="2_0ixeb"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_45ejj"]
 [ext_resource type="Script" path="res://scripts/view.gd" id="3_apxs3"]
 
@@ -12,9 +12,9 @@ metadata/__load_path__ = "res://scenes/bullet.tscn"
 
 [node name="RobootBomb" parent="." node_paths=PackedStringArray("view") instance=ExtResource("1_kofne")]
 script = ExtResource("2_45ejj")
-view = NodePath("../View")
+view = NodePath("../ViewTp")
 bullet_scene = SubResource("Resource_pgp4j")
 
-[node name="View" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_0ixeb")]
+[node name="ViewTp" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_0ixeb")]
 script = ExtResource("3_apxs3")
 target = NodePath("../RobootBomb")

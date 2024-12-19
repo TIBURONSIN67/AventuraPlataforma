@@ -18,13 +18,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58679, 0)
 
 [node name="MobilePlatform" parent="." node_paths=PackedStringArray("activator_node") instance=ExtResource("4_x5duj")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.939127, 5.21534)
-activator_node = NodePath("../ButtonTogglePlatform2")
+activator_node = NodePath("../ButtonTogglePlatform")
+direction = null
+initial_direction = null
 
 [node name="MobilePlatform2" parent="." node_paths=PackedStringArray("activator_node") instance=ExtResource("4_x5duj")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 4.07075, 0.939127, -4.33438)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 4.07075, 0.939127, -4.32452)
 activator_node = NodePath("../ButtonTogglePlatform2")
-direction = Vector3(0, -1, 0)
-initial_direction = -1
+direction = null
+
+[node name="ButtonTogglePlatform" parent="." instance=ExtResource("5_wwp5g")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.470124, 0)
 
 [node name="ButtonTogglePlatform2" parent="." instance=ExtResource("5_wwp5g")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.97321, 0.470124, 0)

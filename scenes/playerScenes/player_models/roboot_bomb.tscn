@@ -124,13 +124,13 @@ parameters/Transition/current_index = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501087, 0)
 
 [node name="Skeleton3D" parent="Character/character-male-c" index="0"]
-bones/3/rotation = Quaternion(-0.0402888, 0, 0, 0.999188)
-bones/4/rotation = Quaternion(0, 0, -0.268466, 0.963289)
-bones/5/rotation = Quaternion(0, 0, 0.268466, 0.963289)
-bones/6/rotation = Quaternion(0, 0.0402888, 0, 0.999188)
+bones/3/rotation = Quaternion(0.0212941, 0, 0, 0.999773)
+bones/4/rotation = Quaternion(0, 0, -0.322919, 0.946427)
+bones/5/rotation = Quaternion(0, 0, 0.322919, 0.946427)
+bones/6/rotation = Quaternion(0, -0.0212941, 0, 0.999773)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Character/character-male-c/Skeleton3D" index="2"]
-transform = Transform3D(0.855852, -0.51722, 0, 0.515541, 0.853074, 0.0805122, -0.0416425, -0.0689066, 0.996754, -0.0998968, 0.288314, -0.0262644)
+transform = Transform3D(0.791447, -0.611238, 0, 0.610684, 0.790729, -0.0425786, 0.0260257, 0.0336987, 0.999093, -0.0998968, 0.287159, -0.0125129)
 bone_name = "arm-right"
 bone_idx = 5
 

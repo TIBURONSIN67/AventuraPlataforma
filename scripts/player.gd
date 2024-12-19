@@ -45,16 +45,8 @@ var coins = 0
 @onready var particles_trail = $ParticlesTrail
 @onready var sound_footsteps = $SoundFootsteps
 @onready var model:Node3D = $Character
-#@onready var animation:AnimationPlayer = $Character/AnimationPlayer
 @onready var animation_tree:AnimationTree = $AnimationTree
-#@onready var gunz_a_l:MeshInstance3D  = $Character/Armature/Skeleton3D/GunzA_L
-#@onready var gunz_a_r:MeshInstance3D = $Character/Armature/Skeleton3D/GunzA_R
-#@onready var standing_shape:CollisionShape3D = $StandingShape
-#@onready var flipped_shape:CollisionShape3D = $FlippedShape
-#@onready var character: Node3D = $Character
-#@onready var standing_shape_leg: CollisionShape3D = $StandingShapeLeg
-#@onready var flipped_shape_leg: CollisionShape3D = $FlippedShapeLeg
-#
+
 
 #variable velocity 
 var applied_velocity: Vector3
@@ -244,15 +236,6 @@ func _jump_state(delta: float)-> void:
 		model.scale = Vector3(0.5, 1.5, 0.5)
 		jump_single = true
 		
-	#elif Input.is_action_just_pressed(jump) and (not jump_double):
-		#Audio.play("res://sounds/jump.ogg")
-		##change_collision_shape("flipped")
-		#change_anim_move_state("DoubleJump")
-		#gravity = double_jump_gravity
-		#velocity.y = double_jump_strength * delta
-		#model.scale = Vector3(0.7, 1.3, 0.7)
-		#jump_double = true
-	
 
 	if not is_on_floor() and velocity.y < 0:
 		change_state("Fall")
@@ -273,15 +256,6 @@ func _fall_state(delta: float)->void:
 		jump_double = false
 		gravity = defalut_gravity
 		
-	#elif Input.is_action_just_pressed(jump) and (not jump_double):
-		#Audio.play("res://sounds/jump.ogg")
-		##change_collision_shape("flipped")
-		#change_anim_move_state("DoubleJump")
-		#gravity = double_jump_gravity
-		#velocity.y = double_jump_strength * delta
-		#model.scale = Vector3(0.7, 1.3, 0.7)
-		#jump_double = true
-
 		
 # Ejemplo de cambio de estado
 func change_state(new_state: String) -> void:
@@ -301,19 +275,7 @@ func exit_state(state: String) -> void:
 #			print("saliendo de fall")
 	pass
 	
-#func change_collision_shape(state):
-	#if state == "standing":
-		#standing_shape.disabled = false
-		#standing_shape_leg.disabled = false
-		#flipped_shape.disabled = true
-		#flipped_shape_leg.disabled = true
-	#elif state == "flipped":
-		#standing_shape.disabled = true
-		#standing_shape_leg.disabled = true
-		#flipped_shape.disabled = false
-		#flipped_shape_leg.disabled = false
-	#else:
-		#print("escriva una estado valido ",state)
+
 
 func check_player_move_input(delta):
 	"""FUNCION PARA GESTIONAR LAS ENTRADAS DEL TECLADO"""

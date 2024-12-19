@@ -3,9 +3,9 @@ extends Node3D
 @export_group("Properties")
 @export var target = CharacterBody3D
 @export_group("Zoom")
-@export var zoom_minimum = 5
+@export var zoom_minimum = 15
 @export var zoom_maximum = 1
-@export var zoom_speed = 250
+@export var zoom_speed = 350
 
 @export_group("Rotation")
 @export var rotation_speed = 10
@@ -17,7 +17,7 @@ extends Node3D
 @export var move_right:String = "v1_right"
 
 var camera_rotation:Vector3
-var zoom = 5
+var zoom = 3
 var zoom_direction:int = 0
 
 @onready var spring_arm = $SpringArm3D
@@ -65,7 +65,7 @@ func handle_input(delta):
 	keyboard_input.x = Input.get_axis(move_up, move_down)
 	
 	camera_rotation -= keyboard_input.limit_length(1.0) * keyboard_rotation_speed * delta
-	camera_rotation.x = clamp(camera_rotation.x, -15, 80)
+	camera_rotation.x = clamp(camera_rotation.x, -5, 80)
 	# Zooming
 	
 	zoom += zoom_direction * zoom_speed * delta
