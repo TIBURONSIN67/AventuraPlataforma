@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 Global="*res://scripts/Globals/Global.gd"
 Audio="*res://scripts/audio.gd"
 
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
 [input]
 
 p1_forward={
