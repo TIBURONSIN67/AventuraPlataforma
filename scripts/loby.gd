@@ -70,7 +70,7 @@ func _on_send_button_ip():
 	var ip = input_ip.text
 	var error = peer.create_client(ip, PORT)
 	if error != OK:
-		print("Error conectándose al servidor:", error)
+		print("Error conectándose al servidor: ", error)
 		return
 	multiplayer.multiplayer_peer = peer
 	print("Cliente conectado")
