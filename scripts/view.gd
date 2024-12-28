@@ -8,11 +8,6 @@ extends Node3D
 
 @export_group("Rotation")
 @export var rotation_speed = 10
-@export_group("Inputs")
-@export var move_up:String = "v1_up"
-@export var move_down:String = "v1_down"
-@export var move_left:String = "v1_left"
-@export var move_right:String = "v1_right"
 
 var camera_rotation:Vector3
 var zoom = 7
@@ -20,15 +15,22 @@ var zoom_direction:int = 0
 
 @onready var spring_arm = $SpringArm3D
 var touch_pos:Vector2
-var touch_sens_y = 70
-var touch_sens_x = 120
+
 
 @onready var is_local_player = false  # Variable para identificar al jugador local
+
+# Variables de suavizado
+var target_rotation: Vector3
+var rotation_velocity: Vector3 = Vector3.ZERO
+@export var smooth_factor: float = 0.1
+@export var touch_sens_y = 25
+@export var touch_sens_x = 30
 
 func _ready():
 	if is_local_player:
 		position = target.position
-		camera_rotation = global_rotation_degrees # Inicializar rotación
+		camera_rotation = global_rotation_degrees  # Inicializar rotación
+		target_rotation = camera_rotation  # Almacenamos la rotación inicial
 
 
 func _input(event: InputEvent) -> void:
@@ -40,11 +42,13 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta):
 	# Set position and rotation to targets
-	#inportante tener esto el posision local y no global
 	position.x = lerp(position.x, target.position.x, delta * 10)
 	position.z = lerp(position.z, target.position.z, delta * 10)
 	position.y = lerp(position.y, target.position.y, delta * 6)
-	rotation_degrees = lerp(rotation_degrees,camera_rotation, delta * 40)
+
+	# Suavizamos la rotación con lerp
+	rotation_degrees = lerp(rotation_degrees, target_rotation, delta * 30)
+	
 	spring_arm.spring_length = lerp(spring_arm.spring_length, float(zoom), 5 * delta)
 
 	handle_input(delta)
@@ -53,10 +57,18 @@ func _physics_process(delta):
 
 func handle_input(delta):
 	touch_pos = touch_pos.normalized()
-	camera_rotation.y -= touch_pos.x * delta * touch_sens_y
-	camera_rotation.x += touch_pos.y * delta * touch_sens_x
-	camera_rotation.x = clamp(camera_rotation.x, -10, 80)
-	
+
+	# Suavizamos la rotación con el toque
+	target_rotation.y -= touch_pos.x * rotation_speed * delta * touch_sens_y
+	target_rotation.x += touch_pos.y * rotation_speed * delta * touch_sens_x
+
+	# Limitar la rotación en el eje X para evitar giros extremos
+	target_rotation.x = clamp(target_rotation.x, -10, 80)
+
+	# Inercia en la rotación (suavizado)
+	rotation_velocity = lerp(rotation_velocity, target_rotation - camera_rotation, smooth_factor)
+	camera_rotation += rotation_velocity
+
 	touch_pos = Vector2.ZERO
-	# Zooming
-	
+
+	# Zooming (este puede ser el código que ya tienes para zoom)
