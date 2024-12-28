@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqqgyqafm7xwp"]
+
+[ext_resource type="Environment" uid="uid://bqnqgflivjvue" path="res://scenes/main-environment.tres" id="1_ahusb"]
+[ext_resource type="Script" path="res://scripts/loby.gd" id="1_f8wk3"]
+[ext_resource type="PackedScene" uid="uid://bkr7wat3ti576" path="res://scenes/level_1.tscn" id="4_t2slg"]
+[ext_resource type="PackedScene" uid="uid://biu3f2bayprba" path="res://scenes/loby.tscn" id="7_tdvx1"]
+
+[node name="Main" type="Node3D" node_paths=PackedStringArray("menu")]
+script = ExtResource("1_f8wk3")
+menu = NodePath("Loby")
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_ahusb")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.422618, -0.694272, 0.582563, 0, 0.642788, 0.766044, -0.906308, 0.323744, -0.271654, 0, 0, 0)
+shadow_enabled = true
+shadow_opacity = 0.75
+
+[node name="Level1" parent="." instance=ExtResource("4_t2slg")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+
+[node name="Loby" parent="." instance=ExtResource("7_tdvx1")]
+
+[connection signal="button_up" from="Loby/VBoxContainer/Join" to="." method="_on_join_button_up"]
+[connection signal="button_up" from="Loby/VBoxContainer/Host" to="." method="_on_host_button_up"]
+[connection signal="button_up" from="Loby/VBoxContainer/Send" to="." method="_on_send_button_ip"]
+
+[editable path="Loby"]
