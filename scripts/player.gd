@@ -106,9 +106,6 @@ func _physics_process(delta: float)->void:
 	velocity.y -= gravity * delta
 	move_and_slide()
 	
-	if position.y < -10:
-		get_tree().reload_current_scene()
-
 	# Animation for scale (jumping and landing)
 	model.scale = model.scale.lerp(Vector3(1, 1, 1), delta * 8)
 
@@ -248,10 +245,6 @@ func check_player_move_input(delta):
 		rotation.y = lerp_angle(rotation.y, atan2(input.x, input.z), delta * 10)
 	else:
 		input = Vector3.ZERO
-
-
-func collect_door_key():
-	print("llaves")
 
 func check_mele_atack_input():
 	if Input.is_action_pressed("Mele"):

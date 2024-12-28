@@ -1,18 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkr7wat3ti576"]
+[gd_scene load_steps=6 format=3 uid="uid://bkr7wat3ti576"]
 
-[ext_resource type="PackedScene" uid="uid://dppo17w046l2c" path="res://models/World/plataformer2/block-grass-large.glb" id="1_wxg2c"]
-[ext_resource type="PackedScene" uid="uid://dolu001v0klkk" path="res://models/World/ptototype1/barrel-open.glb" id="2_bk1wp"]
-[ext_resource type="PackedScene" uid="uid://c56xycpmlp8ad" path="res://models/World/ptototype1/barrel.glb" id="3_vsci3"]
-[ext_resource type="PackedScene" uid="uid://c2nq764sljcxr" path="res://models/World/ptototype1/patch-grass-large.glb" id="4_0ud2t"]
-[ext_resource type="PackedScene" uid="uid://ru2nsw5knnt2" path="res://models/World/plataformer2/block-grass-large-tall.glb" id="5_vb4pl"]
+[ext_resource type="PackedScene" uid="uid://557qr11yhdlv" path="res://models/levels/untitled.blend" id="3_qeqlc"]
 [ext_resource type="PackedScene" uid="uid://c3xujc4pcfl1j" path="res://scenes/itemsScene/button_toggle_platform.tscn" id="7_piv7f"]
 [ext_resource type="PackedScene" uid="uid://cxtcmsa6gtfan" path="res://scenes/itemsScene/mobile_platform.tscn" id="8_lmsw3"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vtp7n"]
-size = Vector3(1.99597, 1.00238, 1.97559)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_boqkw"]
+data = PackedVector3Array(84.3755, -0.0485, -25, 34.3755, 19.9515, -25, 34.3755, -0.0485, -25, 84.3755, -0.0485, -25, 84.3755, 19.9515, -25, 34.3755, 19.9515, -25, 34.3755, -0.0485, 25, 84.3755, 19.9515, 25, 84.3755, -0.0485, 25, 34.3755, -0.0485, 25, 34.3755, 19.9515, 25, 84.3755, 19.9515, 25, 84.3755, -0.0485, 25, 84.3755, 19.9515, -25, 84.3755, -0.0485, -25, 84.3755, -0.0485, 25, 84.3755, 19.9515, 25, 84.3755, 19.9515, -25, 34.3755, -0.0485, -25, 34.3755, 19.9515, 25, 34.3755, -0.0485, 25, 34.3755, -0.0485, -25, 34.3755, 19.9515, -25, 34.3755, 19.9515, 25, 34.3755, 19.9515, 25, 84.3755, 19.9515, -25, 84.3755, 19.9515, 25, 34.3755, 19.9515, 25, 34.3755, 19.9515, -25, 84.3755, 19.9515, -25)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_22jqr"]
-size = Vector3(2.00293, 1.9873, 2.00108)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wwcoa"]
+data = PackedVector3Array(-10, 10, 10, 10, 10, -10, 10, 10, 10, -10, 10, 10, -10, 10, -10, 10, 10, -10, 10, 0, -10, -10, 10, -10, -10, 0, -10, 10, 0, -10, 10, 10, -10, -10, 10, -10, -10, 0, 10, 10, 10, 10, 10, 0, 10, -10, 0, 10, -10, 10, 10, 10, 10, 10, 10, 0, 10, 10, 10, -10, 10, 0, -10, 10, 0, 10, 10, 10, 10, 10, 10, -10, -10, 0, -10, -10, 10, 10, -10, 0, 10, -10, 0, -10, -10, 10, -10, -10, 10, 10)
 
 [node name="Level1" type="Node3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -20,65 +16,27 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 [node name="Floor" type="Node3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -2, 0)
 
-[node name="block-grass-large2" parent="Floor" instance=ExtResource("1_wxg2c")]
+[node name="untitled" parent="Floor" instance=ExtResource("3_qeqlc")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1.70623, 1, 0.2502)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/block-grass-large2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0010376, 0.498882, 0.0240524)
-shape = SubResource("BoxShape3D_vtp7n")
+[node name="Plane" parent="Floor/untitled" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.99302, -0.0227337, 0.00782204)
 
-[node name="block-grass-large3" parent="Floor" instance=ExtResource("1_wxg2c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.07439)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/untitled"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.99302, -0.0227337, 0.00782204)
+shape = SubResource("ConcavePolygonShape3D_boqkw")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/block-grass-large3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0010376, 0.498882, 0.0240524)
-shape = SubResource("BoxShape3D_vtp7n")
-
-[node name="block-grass-large4" parent="Floor" instance=ExtResource("1_wxg2c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.12061)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/block-grass-large4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0010376, 0.498882, 0.0240524)
-shape = SubResource("BoxShape3D_vtp7n")
-
-[node name="block-grass-large5" parent="Floor" instance=ExtResource("1_wxg2c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.14359)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/block-grass-large5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0010376, 0.498882, 0.0240524)
-shape = SubResource("BoxShape3D_vtp7n")
-
-[node name="block-grass-large-tall" parent="Floor" instance=ExtResource("5_vb4pl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75, 0, 0)
-
-[node name="block-grass-large-tall" parent="Floor/block-grass-large-tall" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/block-grass-large-tall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00146484, 1.00374, -0.000526428)
-shape = SubResource("BoxShape3D_22jqr")
-
-[node name="Decoration" type="Node3D" parent="."]
-
-[node name="barrel-open2" parent="Decoration" instance=ExtResource("2_bk1wp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-
-[node name="barrel2" parent="Decoration" instance=ExtResource("3_vsci3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
-
-[node name="patch-grass-large2" parent="Decoration" instance=ExtResource("4_0ud2t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.008, 0)
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Floor/untitled"]
+shape = SubResource("ConcavePolygonShape3D_wwcoa")
 
 [node name="Mechanism" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.83408, 5.10024, 0)
 
 [node name="ButtonTogglePlatform" parent="Mechanism" instance=ExtResource("7_piv7f")]
-transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, -1.38622, 0, 1)
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0.740142, -0.117524, 2.68059)
 
 [node name="MobilePlatform" parent="Mechanism" node_paths=PackedStringArray("activator_node") instance=ExtResource("8_lmsw3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5464, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13369, -0.291404, 2.51359)
 activator_node = NodePath("../ButtonTogglePlatform")
 
-[editable path="Floor/block-grass-large2"]
-[editable path="Floor/block-grass-large3"]
-[editable path="Floor/block-grass-large4"]
-[editable path="Floor/block-grass-large5"]
-[editable path="Floor/block-grass-large-tall"]
+[editable path="Floor/untitled"]

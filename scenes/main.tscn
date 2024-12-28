@@ -1,21 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqqgyqafm7xwp"]
+[gd_scene load_steps=7 format=3 uid="uid://bqqgyqafm7xwp"]
 
-[ext_resource type="Environment" uid="uid://bqnqgflivjvue" path="res://scenes/main-environment.tres" id="1_ahusb"]
 [ext_resource type="Script" path="res://scripts/loby.gd" id="1_f8wk3"]
 [ext_resource type="PackedScene" uid="uid://bkr7wat3ti576" path="res://scenes/level_1.tscn" id="4_t2slg"]
 [ext_resource type="PackedScene" uid="uid://biu3f2bayprba" path="res://scenes/loby.tscn" id="7_tdvx1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ou2e7"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_j5fpt"]
+sky_material = SubResource("ProceduralSkyMaterial_ou2e7")
+
+[sub_resource type="Environment" id="Environment_ty4xq"]
+background_mode = 2
+sky = SubResource("Sky_j5fpt")
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="Main" type="Node3D" node_paths=PackedStringArray("menu")]
 script = ExtResource("1_f8wk3")
 menu = NodePath("Loby")
 
-[node name="Environment" type="WorldEnvironment" parent="."]
-environment = ExtResource("1_ahusb")
-
-[node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.422618, -0.694272, 0.582563, 0, 0.642788, 0.766044, -0.906308, 0.323744, -0.271654, 0, 0, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
-shadow_opacity = 0.75
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ty4xq")
 
 [node name="Level1" parent="." instance=ExtResource("4_t2slg")]
 

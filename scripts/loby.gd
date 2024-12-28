@@ -31,8 +31,7 @@ func _on_player_connected(id):
 			return
 		var player = multiplayer_spawner.spawn(node_name)
 		players[id] = player
-		# Inicializa la posición del jugador
-		player.position = Vector3(randf() * 3, 0, randf() * 3)
+		player.position = Vector3(randf() * 3, 15, randf() * 3)
 
 # Se desconecta un jugador
 func _on_player_disconnected(id):
