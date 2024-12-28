@@ -20,7 +20,8 @@ var zoom_direction:int = 0
 
 @onready var spring_arm = $SpringArm3D
 var touch_pos:Vector2
-var touch_sens = 70
+var touch_sens_y = 70
+var touch_sens_x = 120
 
 @onready var is_local_player = false  # Variable para identificar al jugador local
 
@@ -43,7 +44,7 @@ func _physics_process(delta):
 	position.x = lerp(position.x, target.position.x, delta * 10)
 	position.z = lerp(position.z, target.position.z, delta * 10)
 	position.y = lerp(position.y, target.position.y, delta * 6)
-	rotation_degrees = lerp(rotation_degrees,camera_rotation, delta * 30)
+	rotation_degrees = lerp(rotation_degrees,camera_rotation, delta * 40)
 	spring_arm.spring_length = lerp(spring_arm.spring_length, float(zoom), 5 * delta)
 
 	handle_input(delta)
@@ -52,8 +53,8 @@ func _physics_process(delta):
 
 func handle_input(delta):
 	touch_pos = touch_pos.normalized()
-	camera_rotation.y -= touch_pos.x * delta * touch_sens
-	camera_rotation.x += touch_pos.y * delta * touch_sens
+	camera_rotation.y -= touch_pos.x * delta * touch_sens_y
+	camera_rotation.x += touch_pos.y * delta * touch_sens_x
 	camera_rotation.x = clamp(camera_rotation.x, -10, 80)
 	
 	touch_pos = Vector2.ZERO
