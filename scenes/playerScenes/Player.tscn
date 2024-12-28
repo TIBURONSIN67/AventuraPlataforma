@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c8mvix6qkkkkt"]
+[gd_scene load_steps=22 format=3 uid="uid://c8mvix6qkkkkt"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1ak1w"]
 [ext_resource type="ArrayMesh" uid="uid://deu06eho4c74" path="res://mesh/dust.res" id="1_uk2bs"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://e3qe0ybs2yb2" path="res://models/wepons/GLTF format/blasterB.glb" id="4_lrqra"]
 [ext_resource type="PackedScene" uid="uid://drj8yyl38l8co" path="res://scenes/viewScene/view_tp.tscn" id="5_1xdjl"]
 [ext_resource type="Script" path="res://scripts/view.gd" id="6_q3oss"]
+[ext_resource type="PackedScene" uid="uid://cq2f4ipfimg0h" path="res://scenes/UI/gui_player.tscn" id="8_65a8g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7stj"]
 diffuse_mode = 2
@@ -161,13 +162,13 @@ parameters/Transition/current_index = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501087, 0)
 
 [node name="Skeleton3D" parent="Character/character-male-c" index="0"]
-bones/3/rotation = Quaternion(0.0378792, 0, 0, 0.999282)
-bones/4/rotation = Quaternion(0, 0, -0.282321, 0.95932)
-bones/5/rotation = Quaternion(0, 0, 0.282321, 0.95932)
-bones/6/rotation = Quaternion(0, -0.0378792, 0, 0.999282)
+bones/3/rotation = Quaternion(-0.042009, 0, 0, 0.999117)
+bones/4/rotation = Quaternion(0, 0, -0.263487, 0.964663)
+bones/5/rotation = Quaternion(0, 0, 0.263487, 0.964663)
+bones/6/rotation = Quaternion(0, 0.042009, 0, 0.999117)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Character/character-male-c/Skeleton3D" index="2"]
-transform = Transform3D(0.84059, -0.541672, 0, 0.540117, 0.838178, -0.075704, 0.0410067, 0.063636, 0.99713, -0.0998968, 0.286559, -0.00884201)
+transform = Transform3D(0.861149, -0.508352, 0, 0.506558, 0.85811, 0.0839439, -0.042673, -0.0722882, 0.996471, -0.0998968, 0.288322, -0.0266503)
 bone_name = "arm-right"
 bone_idx = 5
 
@@ -186,5 +187,8 @@ replication_config = SubResource("SceneReplicationConfig_tthqu")
 stream = ExtResource("2_x8h24")
 autoplay = true
 
+[node name="GUI_player" parent="." instance=ExtResource("8_65a8g")]
+
 [editable path="Character"]
 [editable path="ViewTp"]
+[editable path="GUI_player"]

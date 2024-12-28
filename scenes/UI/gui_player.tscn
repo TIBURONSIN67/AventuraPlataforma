@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq2f4ipfimg0h"]
+
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="1_7ohm8"]
+[ext_resource type="Script" path="res://scenes/UI/gui_player.gd" id="1_o1eff"]
+[ext_resource type="Texture2D" uid="uid://ic3cgl8te4j1" path="res://icon.svg" id="3_pvt6x"]
+
+[node name="GUI_player" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o1eff")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(600, 600)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -305.0
+offset_right = 596.0
+offset_bottom = 295.0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+
+[node name="Virtual Joystick" parent="HBoxContainer" instance=ExtResource("1_7ohm8")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -502.0
+offset_top = -648.0
+offset_right = -2.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+
+[node name="Jump" type="TouchScreenButton" parent="HBoxContainer2"]
+position = Vector2(182, 31)
+scale = Vector2(0.7, 0.7)
+texture_normal = ExtResource("3_pvt6x")
+action = "p1_jump"
+
+[node name="Jump2" type="TouchScreenButton" parent="HBoxContainer2"]
+position = Vector2(95, 412)
+scale = Vector2(0.7, 0.7)
+texture_normal = ExtResource("3_pvt6x")
+action = "Mele"

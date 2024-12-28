@@ -24,6 +24,7 @@ var double_jump_gravity = 17
 #shoot
 @export_subgroup("Oters")
 var is_mele_atack = false
+@onready var virtual_joystick: VirtualJoystick = $"GUI_player/HBoxContainer/Virtual Joystick"
 
 #INPUT
 var input:Vector3 = Vector3.ZERO
@@ -104,11 +105,7 @@ func _physics_process(delta: float)->void:
 		
 	velocity.y -= gravity * delta
 	move_and_slide()
-
-	# Rotation
 	
-	# Falling/respawning
-
 	if position.y < -10:
 		get_tree().reload_current_scene()
 
@@ -144,10 +141,6 @@ func handle_effects(_delta):
 # Handle movement input
 
 func handle_controls(delta):
-	input.x = input_keyboard.x
-	input.z = input_keyboard.y
-	input = input.rotated(Vector3.UP, view.rotation.y)
-
 	if input.length() > 1:
 		input = input.normalized()
 		
@@ -156,16 +149,12 @@ func handle_controls(delta):
 # Ejemplo de estado Idle
 func _idle_state(_delta: float) -> void:
 	check_mele_atack_input()
-	input_keyboard = Vector2.ZERO
+	input.x = 0
+	input.z = 0
 	jump_single = false
 	gravity = defalut_gravity
 	change_anim_move_state("Idle")
-	if (
-		Input.is_action_pressed(move_left) or 
-		Input.is_action_pressed(move_right) or
-		Input.is_action_pressed(move_forward) or
-		Input.is_action_pressed(move_backward) 
-		):
+	if (virtual_joystick.is_pressed):
 		change_state("Walk")
 	elif Input.is_action_pressed(jump):
 		change_state("Jump")
@@ -182,12 +171,7 @@ func _run_state(delta: float) -> void:
 	if Input.is_action_pressed(jump):
 		change_state("Jump")
 	
-	elif not (
-		Input.is_action_pressed(move_left) or 
-		Input.is_action_pressed(move_right) or
-		Input.is_action_pressed(move_forward) or
-		Input.is_action_pressed(move_backward) 
-		):
+	elif not (virtual_joystick.is_pressed):
 		change_state("Idle")
 		
 func _walk_state(delta: float) -> void:
@@ -201,12 +185,7 @@ func _walk_state(delta: float) -> void:
 	if Input.is_action_pressed(jump):
 		change_state("Jump")
 	
-	elif not (
-		Input.is_action_pressed(move_left) or 
-		Input.is_action_pressed(move_right) or
-		Input.is_action_pressed(move_forward) or
-		Input.is_action_pressed(move_backward) 
-		):
+	elif not (virtual_joystick.is_pressed):
 		change_state("Idle")
 		
 func _jump_state(delta: float)-> void:
@@ -261,27 +240,15 @@ func exit_state(_state: String) -> void:
 
 
 func check_player_move_input(delta):
-	"""FUNCION PARA GESTIONAR LAS ENTRADAS DEL TECLADO"""
-	if Input.is_action_pressed(move_right):
-		rotation.y = lerp_angle(rotation.y, (view.rotation.y - deg_to_rad(90)), delta * 10)
-		input_keyboard.x = -1
-	elif Input.is_action_pressed(move_left):
-		rotation.y = lerp_angle(rotation.y, (view.rotation.y + deg_to_rad(90)), delta * 10)
-		input_keyboard.x = 1
-	if Input.is_action_pressed(move_forward):
-		rotation.y = lerp_angle(rotation.y, view.rotation.y, delta * 10)
-		input_keyboard.y = 1
-	elif Input.is_action_pressed(move_backward):
-		input_keyboard.y = -1
-		rotation.y = lerp_angle(rotation.y, (view.rotation.y - deg_to_rad(180)), delta * 10)
-	if Input.is_action_just_released(move_left):
-		input_keyboard.x = 0
-	elif Input.is_action_just_released(move_right):
-		input_keyboard.x = 0
-	if Input.is_action_just_released(move_forward):
-		input_keyboard.y = 0
-	elif Input.is_action_just_released(move_backward):
-		input_keyboard.y = 0
+	"""Función para gestionar las entradas del joystick."""
+	if virtual_joystick.is_pressed:
+		input.x = virtual_joystick.output.x * -1
+		input.z = virtual_joystick.output.y * -1
+		input = input.rotated(Vector3.UP, view.rotation.y)
+		rotation.y = lerp_angle(rotation.y, atan2(input.x, input.z), delta * 10)
+	else:
+		input = Vector3.ZERO
+
 
 func collect_door_key():
 	print("llaves")
