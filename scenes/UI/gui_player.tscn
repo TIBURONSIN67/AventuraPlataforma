@@ -15,16 +15,16 @@ script = ExtResource("1_o1eff")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(800, 800)
-layout_mode = 1
-offset_top = 230.0
+layout_mode = 0
+offset_top = 250.0
 offset_right = 800.0
-offset_bottom = 1030.0
+offset_bottom = 1050.0
 scale = Vector2(0.5, 0.5)
 
 [node name="Virtual Joystick" parent="HBoxContainer" instance=ExtResource("1_7ohm8")]
 layout_mode = 2
 joystick_mode = 1
-visibility_mode = 2
+visibility_mode = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 layout_mode = 1
