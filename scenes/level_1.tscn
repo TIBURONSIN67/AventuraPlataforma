@@ -38,5 +38,8 @@ transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0.740142, -0.117524, 2.68
 [node name="MobilePlatform" parent="Mechanism" node_paths=PackedStringArray("activator_node") instance=ExtResource("8_lmsw3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13369, -0.291404, 2.51359)
 activator_node = NodePath("../ButtonTogglePlatform")
+distance = 20.0
+direction = Vector3(-1, 0, 0)
+initial_direction = -1
 
 [editable path="Floor/untitled"]

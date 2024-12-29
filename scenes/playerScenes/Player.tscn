@@ -1,13 +1,14 @@
-[gd_scene load_steps=22 format=3 uid="uid://c8mvix6qkkkkt"]
+[gd_scene load_steps=29 format=3 uid="uid://c8mvix6qkkkkt"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1ak1w"]
 [ext_resource type="ArrayMesh" uid="uid://deu06eho4c74" path="res://mesh/dust.res" id="1_uk2bs"]
 [ext_resource type="AudioStream" uid="uid://cydjn1ct3hps2" path="res://sounds/walking.ogg" id="2_x8h24"]
 [ext_resource type="PackedScene" uid="uid://bt3h8ko2uw7ak" path="res://models/ModelsCharacters/GLB format/character-male-c.glb" id="3_kdbcn"]
-[ext_resource type="PackedScene" uid="uid://e3qe0ybs2yb2" path="res://models/wepons/GLTF format/blasterB.glb" id="4_lrqra"]
+[ext_resource type="PackedScene" uid="uid://b4nmjbg5gvqt2" path="res://models/World/ptototype1/tool-axe.glb" id="4_8m5h7"]
 [ext_resource type="PackedScene" uid="uid://drj8yyl38l8co" path="res://scenes/viewScene/view_tp.tscn" id="5_1xdjl"]
 [ext_resource type="Script" path="res://scripts/view.gd" id="6_q3oss"]
 [ext_resource type="PackedScene" uid="uid://cq2f4ipfimg0h" path="res://scenes/UI/gui_player.tscn" id="8_65a8g"]
+[ext_resource type="Script" path="res://scripts/mele_atack_hit.gd" id="9_26fc2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7stj"]
 diffuse_mode = 2
@@ -65,7 +66,7 @@ input_3/break_loop_at_end = false
 input_3/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v80rv"]
-graph_offset = Vector2(-331.369, 111.218)
+graph_offset = Vector2(-29, 132)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_spbgv")
 nodes/Animation/position = Vector2(0, 0)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_4i530")
@@ -95,34 +96,96 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath(".:scale")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath("ParticlesTrail:emitting")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("audio:position")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("audio:volume_db")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("audio:pitch_scale")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("audio:autoplay")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("audio:stream_paused")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath("Character:scale")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+
+[sub_resource type="GDScript" id="GDScript_rx5im"]
+script/source = "extends MultiplayerSynchronizer
+
+
+@onready var player: CharacterBody3D = $\"..\"
+"
+
+[sub_resource type="Animation" id="Animation_g3ap5"]
+resource_name = "Atack"
+length = 0.416
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitArea/CollisionShape3D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_pkrus"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitArea/CollisionShape3D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hslp6"]
+_data = {
+"Atack": SubResource("Animation_g3ap5"),
+"RESET": SubResource("Animation_pkrus")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_idxqc"]
+radius = 0.294672
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0bamf"]
+properties/0/path = NodePath("CustomTracks:current_animation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimationTree:parameters/Mele/active")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimationTree:parameters/Transition/current_state")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 properties/3/path = NodePath("AnimationTree:parameters/Transition/transition_request")
 properties/3/spawn = true
 properties/3/replication_mode = 1
-properties/4/path = NodePath("ParticlesTrail:emitting")
+properties/4/path = NodePath("AnimationTree:parameters/Mele/request")
 properties/4/spawn = true
 properties/4/replication_mode = 1
-properties/5/path = NodePath("AnimationTree:parameters/Mele/request")
-properties/5/spawn = true
-properties/5/replication_mode = 1
-properties/6/path = NodePath("audio:position")
-properties/6/spawn = true
-properties/6/replication_mode = 1
-properties/7/path = NodePath("audio:volume_db")
-properties/7/spawn = true
-properties/7/replication_mode = 1
-properties/8/path = NodePath("audio:pitch_scale")
-properties/8/spawn = true
-properties/8/replication_mode = 1
-properties/9/path = NodePath("audio:autoplay")
-properties/9/spawn = true
-properties/9/replication_mode = 1
-properties/10/path = NodePath("audio:stream_paused")
-properties/10/spawn = true
-properties/10/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("view", "camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_1ak1w")
 view = NodePath("ViewTp")
 camera = NodePath("ViewTp/SpringArm3D/Camera")
@@ -162,18 +225,18 @@ parameters/Transition/current_index = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501087, 0)
 
 [node name="Skeleton3D" parent="Character/character-male-c" index="0"]
-bones/3/rotation = Quaternion(-0.00608185, 0, 0, 0.999982)
-bones/4/rotation = Quaternion(0, 0, -0.365764, 0.930708)
-bones/5/rotation = Quaternion(0, 0, 0.365764, 0.930708)
-bones/6/rotation = Quaternion(0, 0.00608185, 0, 0.999982)
+bones/3/rotation = Quaternion(0.0273991, 0, 0, 0.999625)
+bones/4/rotation = Quaternion(0, 0, -0.320974, 0.947088)
+bones/5/rotation = Quaternion(0, 0, 0.320974, 0.947088)
+bones/6/rotation = Quaternion(0, -0.0273991, 0, 0.999625)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Character/character-male-c/Skeleton3D" index="2"]
-transform = Transform3D(0.732434, -0.680839, 0, 0.680788, 0.732379, 0.0121635, -0.00828136, -0.00890893, 0.999926, -0.0998968, 0.287882, -0.0186071)
+transform = Transform3D(0.793951, -0.607981, 0, 0.607069, 0.792759, -0.0547775, 0.0333037, 0.0434907, 0.998499, -0.0998968, 0.286953, -0.0111596)
 bone_name = "arm-right"
 bone_idx = 5
 
-[node name="blasterB2" parent="Character/character-male-c/Skeleton3D/BoneAttachment3D" instance=ExtResource("4_lrqra")]
-transform = Transform3D(0.25, 0, -0.433013, 0, 0.5, 0, 0.433013, 0, 0.25, -0.281029, 0.110508, 0.0931071)
+[node name="tool-axe2" parent="Character/character-male-c/Skeleton3D/BoneAttachment3D" instance=ExtResource("4_8m5h7")]
+transform = Transform3D(0.808824, 0.541761, 1.74708, 1.63308, 0.646582, -0.956546, -0.823926, 1.8134, -0.180884, -0.222192, -0.0371192, 0.0399641)
 
 [node name="ViewTp" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_1xdjl")]
 top_level = true
@@ -182,12 +245,33 @@ target = NodePath("..")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_tthqu")
+script = SubResource("GDScript_rx5im")
 
 [node name="audio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_x8h24")
 autoplay = true
 
 [node name="GUI_player" parent="." instance=ExtResource("8_65a8g")]
+visible = false
+
+[node name="CustomTracks" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hslp6")
+}
+
+[node name="HitArea" type="Area3D" parent="."]
+collision_mask = 2
+script = ExtResource("9_26fc2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0150688, -0.233563, 0.307945)
+shape = SubResource("SphereShape3D_idxqc")
+disabled = true
+
+[node name="SynchronizeAnim" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_0bamf")
+
+[connection signal="body_entered" from="HitArea" to="HitArea" method="_on_body_entered"]
 
 [editable path="Character"]
 [editable path="ViewTp"]

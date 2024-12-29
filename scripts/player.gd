@@ -9,6 +9,8 @@ signal coin_collected
 @export var movement_speed = 250
 @export var jump_strength = 500
 
+@onready var custom_tracks: AnimationPlayer = $CustomTracks
+
 @export_subgroup("Inputs")
 @export var move_left:String = "p1_left"
 @export var move_right:String = "p1_right"
@@ -84,7 +86,23 @@ func _process(delta: float) -> void:
 	camera.current = true
 	horizontal_velocity = Vector2(velocity.x, velocity.z)
 	speed_factor = horizontal_velocity.length() / movement_speed / delta
-		
+	
+	if Network.players[multiplayer.get_unique_id()]["health"] <= 0:
+		global_position = Vector3(0,20,0)
+		rpc_id(1,"restart_healt")
+
+@rpc("call_local")
+func restart_healt():
+	var id =  multiplayer.get_remote_sender_id()
+	Network.players[id]["health"] = 100
+	rpc("update_health",id,Network.players[id]["health"])
+
+@rpc("any_peer", "reliable")
+func update_health(id:int,new_health: float):
+	if Network.players.has(id):
+		Network.players[id]["health"] = new_health
+		print("Player ", id, " salud actualizada ", new_health)
+
 func _physics_process(delta: float)->void:
 	if not is_multiplayer_authority(): return
 	if states.has(current_state):
@@ -144,8 +162,8 @@ func handle_controls(delta):
 	movement_velocity = input * movement_speed * delta
 	
 # Ejemplo de estado Idle
-func _idle_state(_delta: float) -> void:
-	check_mele_atack_input()
+func _idle_state(delta: float) -> void:
+	check_mele_atack_input(delta)
 	input.x = 0
 	input.z = 0
 	jump_single = false
@@ -158,7 +176,7 @@ func _idle_state(_delta: float) -> void:
 		
 
 func _run_state(delta: float) -> void:
-	check_mele_atack_input()
+	check_mele_atack_input(delta)
 	check_player_move_input(delta) #aseguramos primero verificar las entradas 
 	#del teclado antes de cambiar de estado
 	# Revisar si se ha dejado de presionar alguna tecla de movimiento
@@ -172,7 +190,7 @@ func _run_state(delta: float) -> void:
 		change_state("Idle")
 		
 func _walk_state(delta: float) -> void:
-	check_mele_atack_input()
+	check_mele_atack_input(delta)
 	check_player_move_input(delta) #aseguramos primero verificar las entradas 
 	#del teclado antes de cambiar de estado
 	# Revisar si se ha dejado de presionar alguna tecla de movimiento
@@ -186,7 +204,7 @@ func _walk_state(delta: float) -> void:
 		change_state("Idle")
 		
 func _jump_state(delta: float)-> void:
-	check_mele_atack_input()
+	check_mele_atack_input(delta)
 	check_player_move_input(delta)
 	if not jump_single and is_on_floor():
 		Audio.play("res://sounds/jump.ogg")
@@ -203,7 +221,7 @@ func _jump_state(delta: float)-> void:
 		
 func _fall_state(delta: float)->void:
 	check_player_move_input(delta)
-	check_mele_atack_input()
+	check_mele_atack_input(delta)
 	change_anim_move_state("Fall")
 	#animacion al caer se escala en todos los ejese
 	#se reproduce el sodido cuando toca el piso
@@ -246,17 +264,20 @@ func check_player_move_input(delta):
 	else:
 		input = Vector3.ZERO
 
-func check_mele_atack_input():
+func check_mele_atack_input(delta):
 	if Input.is_action_pressed("Mele"):
 		play_anim_mele_atack()
 		is_mele_atack = true
+		rotation.y = lerp_angle(rotation.y, view.rotation.y, delta * 10)
+		
 	if Input.is_action_just_released("Mele"):
 		is_mele_atack = false
 		
+		
 func play_anim_mele_atack():
 	if not animation_tree.get("parameters/Mele/active"):
+		custom_tracks.play("Atack")
 		animation_tree.set("parameters/Mele/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		
-func stop_mele_atack_anim() -> void:
-	if animation_tree.get("parameters/Mele/active"):
-		animation_tree.set("parameters/Mele/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+
+	

@@ -31,13 +31,11 @@ environment = SubResource("Environment_ty4xq")
 [node name="Level1" parent="." instance=ExtResource("4_t2slg")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("../Players")
+spawn_path = NodePath("..")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 
 [node name="Loby" parent="." instance=ExtResource("7_tdvx1")]
-
-[node name="Players" type="Node3D" parent="."]
 
 [connection signal="button_up" from="Loby/VBoxContainer/Join" to="." method="_on_join_button_up"]
 [connection signal="button_up" from="Loby/VBoxContainer/Host" to="." method="_on_host_button_up"]
