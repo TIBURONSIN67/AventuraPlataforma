@@ -48,7 +48,7 @@ func _on_player_connected(id,player_info):
 func _spawn_player(id: String) -> Node:
 	var player = PLAYER_SCENE.instantiate()
 	player.name = id
-	player.position = Vector3(randf() * 3, 15, randf() * 3)
+	player.position = Vector3(randf() * 3, 30, randf() * 3)
 	return player
 
 func player_disconect(player):
