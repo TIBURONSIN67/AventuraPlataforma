@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c8mvix6qkkkkt"]
+[gd_scene load_steps=30 format=3 uid="uid://c8mvix6qkkkkt"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1ak1w"]
 [ext_resource type="ArrayMesh" uid="uid://deu06eho4c74" path="res://mesh/dust.res" id="1_uk2bs"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/view.gd" id="6_q3oss"]
 [ext_resource type="PackedScene" uid="uid://cq2f4ipfimg0h" path="res://scenes/UI/gui_player.tscn" id="8_65a8g"]
 [ext_resource type="Script" path="res://scripts/mele_atack_hit.gd" id="9_26fc2"]
+[ext_resource type="AudioStream" uid="uid://c810yhkvav3im" path="res://sounds/damage/damage_2_sean.ogg" id="10_8vohq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7stj"]
 diffuse_mode = 2
@@ -225,13 +226,13 @@ parameters/Transition/current_index = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501087, 0)
 
 [node name="Skeleton3D" parent="Character/character-male-c" index="0"]
-bones/3/rotation = Quaternion(0.0273991, 0, 0, 0.999625)
-bones/4/rotation = Quaternion(0, 0, -0.320974, 0.947088)
-bones/5/rotation = Quaternion(0, 0, 0.320974, 0.947088)
-bones/6/rotation = Quaternion(0, -0.0273991, 0, 0.999625)
+bones/3/rotation = Quaternion(-0.0270194, 0, 0, 0.999635)
+bones/4/rotation = Quaternion(0, 0, -0.322248, 0.946655)
+bones/5/rotation = Quaternion(0, 0, 0.322248, 0.946655)
+bones/6/rotation = Quaternion(0, 0.0270194, 0, 0.999635)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Character/character-male-c/Skeleton3D" index="2"]
-transform = Transform3D(0.793951, -0.607981, 0, 0.607069, 0.792759, -0.0547775, 0.0333037, 0.0434907, 0.998499, -0.0998968, 0.286953, -0.0111596)
+transform = Transform3D(0.792313, -0.610115, 0, 0.609224, 0.791156, 0.0540191, -0.0329579, -0.0428, 0.99854, -0.0998968, 0.288208, -0.0232899)
 bone_name = "arm-right"
 bone_idx = 5
 
@@ -249,6 +250,7 @@ script = SubResource("GDScript_rx5im")
 
 [node name="audio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_x8h24")
+volume_db = -0.175
 autoplay = true
 
 [node name="GUI_player" parent="." instance=ExtResource("8_65a8g")]
@@ -270,6 +272,10 @@ disabled = true
 
 [node name="SynchronizeAnim" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_0bamf")
+
+[node name="TakeDamageSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_8vohq")
+pitch_scale = 1.07
 
 [connection signal="body_entered" from="HitArea" to="HitArea" method="_on_body_entered"]
 

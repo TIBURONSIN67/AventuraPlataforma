@@ -17,7 +17,6 @@ var players:Array
 func _ready():
 	Network.player_connected.connect(_on_player_connected)
 	Network.player_disconnected.connect(player_disconect)
-	Network.request_damage_signal.connect(request_damage)
 	multiplayer_spawner.spawn_function = _spawn_player
 	send_button.visible = false
 	input_ip.visible = false
@@ -62,23 +61,3 @@ func player_disconect(player):
 	else:
 		print("Nodo no encontrado:", node_path)
 		
-func request_damage(target_id: int, damage: float):
-	if Network.players.has(target_id) and multiplayer.is_server():
-		_apply_damage(target_id, damage)
-		
-func _apply_damage(target_id: int, damage: float):
-	if Network.players.has(target_id) and multiplayer.is_server():
-		Network.players[target_id]["health"] -= damage
-		if Network.players[target_id]["health"] <= 0:
-			Network.players[target_id]["health"] = 0
-			print("Player", target_id, "has been defeated!")
-
-		# Notifica a todos los clientes sobre el nuevo estado de salud
-		rpc("update_health",target_id,Network.players[target_id]["health"])
-
-
-@rpc("any_peer", "reliable")
-func update_health(id:int,new_health: float):
-	if Network.players.has(id):
-		Network.players[id]["health"] = new_health
-		print("Player ", id, " salud actualizada ", new_health)

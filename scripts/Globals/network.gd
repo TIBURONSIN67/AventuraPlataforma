@@ -89,4 +89,5 @@ func add_player(id:int,node:CharacterBody3D):
 
 @rpc("any_peer","reliable")
 func request_damage(target_id:int,damage:float):
+	print("emitinedo señal de request_damage")
 	request_damage_signal.emit(target_id,damage)

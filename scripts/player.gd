@@ -38,6 +38,7 @@ var coins = 0
 
 @onready var particles_trail = $ParticlesTrail
 @onready var sound_footsteps = $audio
+@onready var take_damage_sound: AudioStreamPlayer3D = $TakeDamageSound
 @onready var model:Node3D = $Character
 @onready var animation_tree:AnimationTree = $AnimationTree
 
@@ -80,6 +81,8 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	if not is_multiplayer_authority(): return
 	gravity = defalut_gravity
+	Network.request_damage_signal.connect(request_damage)
+
 
 func _process(delta: float) -> void:
 	if not is_multiplayer_authority(): return
@@ -90,7 +93,22 @@ func _process(delta: float) -> void:
 	if Network.players[multiplayer.get_unique_id()]["health"] <= 0:
 		global_position = Vector3(0,20,0)
 		rpc_id(1,"restart_healt")
+		
+func request_damage(target_id: int, damage: float):
+	if Network.players.has(target_id) and multiplayer.is_server():
+		_apply_damage(target_id, damage)
+		
+func _apply_damage(target_id: int, damage: float):
+	if Network.players.has(target_id) and multiplayer.is_server():
+		Network.players[target_id]["health"] -= damage
+		Network.players[target_id]["node"].take_damage_sound.play()
+		if Network.players[target_id]["health"] <= 0:
+			Network.players[target_id]["health"] = 0
+			print("Player", target_id, "has been defeated!")
 
+		# Notifica a todos los clientes sobre el nuevo estado de salud
+		rpc("update_health",target_id,Network.players[target_id]["health"])
+		
 @rpc("call_local")
 func restart_healt():
 	var id =  multiplayer.get_remote_sender_id()

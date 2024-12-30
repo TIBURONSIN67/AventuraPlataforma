@@ -11,7 +11,7 @@ var queue = []  # The queue of sounds to play.
 func _ready():
 
 	for i in num_players:
-		var p = AudioStreamPlayer.new()
+		var p = AudioStreamPlayer3D.new()
 		add_child(p)
 		
 		available.append(p)
@@ -23,6 +23,7 @@ func _ready():
 
 func _on_stream_finished(stream): available.append(stream)
 
+@rpc("any_peer","reliable")
 func play(sound_path): queue.append(sound_path)
 
 func _process(_delta):
