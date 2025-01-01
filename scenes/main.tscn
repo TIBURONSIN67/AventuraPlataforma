@@ -35,12 +35,13 @@ spawn_path = NodePath("../Players")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 
-[node name="Loby" parent="." instance=ExtResource("7_tdvx1")]
-
 [node name="Players" type="Node3D" parent="."]
 
-[connection signal="button_up" from="Loby/VBoxContainer/Join" to="." method="_on_join_button_up"]
-[connection signal="button_up" from="Loby/VBoxContainer/Host" to="." method="_on_host_button_up"]
-[connection signal="button_up" from="Loby/VBoxContainer/Send" to="." method="_on_send_button_ip"]
+[node name="Loby" parent="." instance=ExtResource("7_tdvx1")]
+
+[connection signal="button_up" from="Loby/BoxContainer/VBoxContainer/Join" to="." method="_on_join_button_up"]
+[connection signal="button_up" from="Loby/BoxContainer/VBoxContainer/Host" to="." method="_on_host_button_up"]
+[connection signal="button_up" from="Loby/BoxContainer/VBoxContainer/Send" to="." method="_on_send_button_ip"]
+[connection signal="button_up" from="Loby/VBoxContainer/Back" to="." method="_on_back_button_up"]
 
 [editable path="Loby"]

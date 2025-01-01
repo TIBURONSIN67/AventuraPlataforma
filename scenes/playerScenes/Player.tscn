@@ -118,6 +118,15 @@ properties/8/replication_mode = 1
 properties/9/path = NodePath("Character:scale")
 properties/9/spawn = true
 properties/9/replication_mode = 1
+properties/10/path = NodePath("TakeDamageSound:playing")
+properties/10/spawn = true
+properties/10/replication_mode = 1
+properties/11/path = NodePath("TakeDamageSound:volume_db")
+properties/11/spawn = true
+properties/11/replication_mode = 1
+properties/12/path = NodePath("TakeDamageSound:pitch_scale")
+properties/12/spawn = true
+properties/12/replication_mode = 1
 
 [sub_resource type="GDScript" id="GDScript_rx5im"]
 script/source = "extends MultiplayerSynchronizer
@@ -226,13 +235,13 @@ parameters/Transition/current_index = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501087, 0)
 
 [node name="Skeleton3D" parent="Character/character-male-c" index="0"]
-bones/3/rotation = Quaternion(-0.0270194, 0, 0, 0.999635)
-bones/4/rotation = Quaternion(0, 0, -0.322248, 0.946655)
-bones/5/rotation = Quaternion(0, 0, 0.322248, 0.946655)
-bones/6/rotation = Quaternion(0, 0.0270194, 0, 0.999635)
+bones/3/rotation = Quaternion(-0.0267232, 0, 0, 0.999643)
+bones/4/rotation = Quaternion(0, 0, -0.307457, 0.951562)
+bones/5/rotation = Quaternion(0, 0, 0.307457, 0.951562)
+bones/6/rotation = Quaternion(0, 0.0267232, 0, 0.999643)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Character/character-male-c/Skeleton3D" index="2"]
-transform = Transform3D(0.792313, -0.610115, 0, 0.609224, 0.791156, 0.0540191, -0.0329579, -0.0428, 0.99854, -0.0998968, 0.288208, -0.0232899)
+transform = Transform3D(0.81094, -0.58513, 0, 0.584294, 0.809782, 0.0534273, -0.0312619, -0.0433264, 0.998572, -0.0998968, 0.288205, -0.0232236)
 bone_name = "arm-right"
 bone_idx = 5
 
