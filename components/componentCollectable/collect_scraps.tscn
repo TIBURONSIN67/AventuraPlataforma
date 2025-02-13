@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://uqy22ntdd8q"]
+
+[sub_resource type="GDScript" id="GDScript_vueui"]
+script/source = "class_name CollectScraps
+extends Node3D
+
+@onready var collect_area: Area3D = $CollectArea
+@export var scraps:Scraps = null
+
+func _ready() -> void:
+	collect_area.area_entered.connect(_on_collect_area_entered)
+
+func _on_collect_area_entered(area: Area3D) -> void:
+	if area.get_parent() is Scrap:
+		var scrap:Scrap = area.get_parent()
+		scraps.set_scrap(scrap.amount)
+		scrap.delete()
+"
+
+[node name="CollectScraps" type="Node3D"]
+script = SubResource("GDScript_vueui")
+
+[node name="CollectArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollectArea"]
+
+[connection signal="area_entered" from="CollectArea" to="." method="_on_area_3d_area_entered"]

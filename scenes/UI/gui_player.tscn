@@ -1,0 +1,102 @@
+[gd_scene load_steps=14 format=3 uid="uid://cq2f4ipfimg0h"]
+
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="1_7ohm8"]
+[ext_resource type="Script" path="res://scenes/UI/gui_player.gd" id="1_8ocr8"]
+[ext_resource type="Texture2D" uid="uid://c5le5hb3tpjf3" path="res://kenney_ui-pack/Vector/Green/button_round_depth_border.svg" id="2_s2l6d"]
+[ext_resource type="Texture2D" uid="uid://bvm642ry5wuqd" path="res://kenney_ui-pack/PNG/Blue/Double/button_round_border.png" id="3_3jepq"]
+[ext_resource type="Texture2D" uid="uid://bhepk70yr8f3" path="res://kenney_ui-pack/Vector/Green/button_round_depth_line.svg" id="3_e6oi1"]
+[ext_resource type="Texture2D" uid="uid://dk11m0aaq4b3r" path="res://kenney_ui-pack/Vector/Red/button_rectangle_depth_gradient.svg" id="4_4kk3e"]
+[ext_resource type="Texture2D" uid="uid://fi12ddqk2kgs" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_gloss.svg" id="7_yn21g"]
+[ext_resource type="Texture2D" uid="uid://iyt6qt1uurrc" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_flat.svg" id="8_au1yf"]
+[ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="9_rr62y"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7pbfo"]
+texture = ExtResource("7_yn21g")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cttj5"]
+texture = ExtResource("8_au1yf")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_82bfu"]
+texture = ExtResource("7_yn21g")
+
+[sub_resource type="Theme" id="Theme_0ar1n"]
+default_font = ExtResource("9_rr62y")
+default_font_size = 25
+Button/font_sizes/font_size = 30
+Button/styles/hover = SubResource("StyleBoxTexture_7pbfo")
+Button/styles/normal = SubResource("StyleBoxTexture_cttj5")
+Button/styles/pressed = SubResource("StyleBoxTexture_82bfu")
+
+[node name="GUI_player" type="Control" node_paths=PackedStringArray("virtual_joystick")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8ocr8")
+virtual_joystick = NodePath("HBoxContainer/Virtual Joystick")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -650.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+
+[node name="Jump" type="TouchScreenButton" parent="HBoxContainer2"]
+position = Vector2(341, 278)
+scale = Vector2(2, 2)
+texture_normal = ExtResource("2_s2l6d")
+texture_pressed = ExtResource("3_e6oi1")
+action = "jump"
+
+[node name="AttackMele" type="TouchScreenButton" parent="HBoxContainer2"]
+position = Vector2(113, 432)
+scale = Vector2(0.7, 0.7)
+texture_normal = ExtResource("3_3jepq")
+action = "Mele"
+
+[node name="HealthProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 28.0
+offset_right = 216.0
+offset_bottom = 92.0
+value = 100.0
+texture_under = ExtResource("4_4kk3e")
+texture_progress = ExtResource("8_au1yf")
+
+[node name="ButtonPause" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1156.0
+offset_top = 25.0
+offset_right = 1262.0
+offset_bottom = 80.0
+theme = SubResource("Theme_0ar1n")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Pause"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -400.0
+offset_right = 400.0
+grow_vertical = 0
+
+[node name="Virtual Joystick" parent="HBoxContainer" instance=ExtResource("1_7ohm8")]
+layout_mode = 2
+joystick_mode = 1
+visibility_mode = 1

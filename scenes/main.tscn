@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://cd6dx31v1uv35"]
+
+[ext_resource type="PackedScene" uid="uid://cccsytsmcp1t7" path="res://scenes/levels/level_1.tscn" id="1_18p6p"]
+[ext_resource type="Texture2D" uid="uid://mv8yqn2babwy" path="res://alpha mayoris .jpg" id="1_s0tn2"]
+[ext_resource type="PackedScene" uid="uid://cherfuecmgegw" path="res://components/componentHitBox/hit_box.tscn" id="2_kqaxi"]
+[ext_resource type="Texture2D" uid="uid://butqn01k2kwtb" path="res://Satelite.png" id="4_0xunp"]
+[ext_resource type="Texture2D" uid="uid://bt55qc37gvtn0" path="res://Nave.png" id="5_yajep"]
+[ext_resource type="Texture2D" uid="uid://biad6rgpfl2yp" path="res://luna.png" id="6_jtrjx"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4hibp"]
+panorama = ExtResource("1_s0tn2")
+
+[sub_resource type="Sky" id="Sky_5j1db"]
+sky_material = SubResource("PanoramaSkyMaterial_4hibp")
+
+[sub_resource type="Environment" id="Environment_ffitd"]
+background_mode = 2
+background_energy_multiplier = 1.5
+sky = SubResource("Sky_5j1db")
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1hp1k"]
+size = Vector3(1722.04, 1, 1111.1)
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ffitd")
+
+[node name="Level1" parent="." instance=ExtResource("1_18p6p")]
+
+[node name="ComponentHitBox" parent="." instance=ExtResource("2_kqaxi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -62, 0)
+is_shoot = true
+damage = 4000.0
+
+[node name="CollisionShape3D" parent="ComponentHitBox/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.59796, 0, 41.8002)
+shape = SubResource("BoxShape3D_1hp1k")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.8402, 0, -39.1048)
+billboard = 1
+texture = ExtResource("4_0xunp")
+
+[node name="Sprite3D3" type="Sprite3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -107.16, 0, -39.1048)
+billboard = 1
+texture = ExtResource("4_0xunp")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, -1101.44, -99.7728, -785.088)
+billboard = 1
+texture = ExtResource("5_yajep")
+
+[node name="Sprite3D6" type="Sprite3D" parent="."]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 891.15, -99.7728, -912.278)
+billboard = 1
+texture = ExtResource("5_yajep")
+
+[node name="Sprite3D7" type="Sprite3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 31.0421, -48.1195, -786.877)
+gi_mode = 2
+billboard = 1
+texture = ExtResource("6_jtrjx")
+
+[editable path="ComponentHitBox"]

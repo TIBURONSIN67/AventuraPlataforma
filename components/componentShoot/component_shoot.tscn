@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://u7n4i5l50grk"]
+
+[ext_resource type="Script" path="res://components/componentShoot/component_shoot.gd" id="1_f32pl"]
+
+[node name="ComponentShoot" type="Node3D"]
+script = ExtResource("1_f32pl")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="."]

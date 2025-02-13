@@ -1,0 +1,170 @@
+[gd_scene load_steps=23 format=3 uid="uid://ci3hlniw6ewjp"]
+
+[ext_resource type="PackedScene" uid="uid://deojidusdaioi" path="res://components/componentHealth/component_health.tscn" id="1_5sgft"]
+[ext_resource type="Script" path="res://components/componentEnemy/enemy_class_b.gd" id="1_h80rg"]
+[ext_resource type="PackedScene" uid="uid://u7n4i5l50grk" path="res://components/componentShoot/component_shoot.tscn" id="4_lhae7"]
+[ext_resource type="PackedScene" uid="uid://bg0ibqhnvakn6" path="res://components/componentAgent/component_agent_class_b.tscn" id="4_s2xdt"]
+[ext_resource type="PackedScene" uid="uid://dn7wxoopdbwc3" path="res://components/componentHurtBox/hurt_box.tscn" id="4_u2oc4"]
+[ext_resource type="PackedScene" uid="uid://8ibjqghiot6d" path="res://components/componentEnemy/EnemyClassB.glb" id="6_5s3u3"]
+[ext_resource type="AudioStream" uid="uid://cydjn1ct3hps2" path="res://sounds/walking.ogg" id="7_5ditx"]
+[ext_resource type="PackedScene" uid="uid://c6qwaes25x4bn" path="res://components/componentEnemy/blasterA.glb" id="8_gme7l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fa2kk"]
+size = Vector3(0.306396, 1, 0.179688)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_46ofe"]
+size = Vector3(0.300537, 1, 0.160156)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5rkd1"]
+height = 3.4
+radius = 4.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_skyet"]
+height = 2.4
+radius = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tykep"]
+albedo_color = Color(0.404511, 0.404511, 0.404511, 1)
+metallic_specular = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4r42x"]
+material = SubResource("StandardMaterial3D_tykep")
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wrh2e"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n5hpx"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w03mq"]
+animation = &"Shoot"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8uf1h"]
+filter_enabled = true
+filters = ["Armature/Skeleton3D:Arm.L", "Armature/Skeleton3D:Arm.R", "Armature/Skeleton3D:Head"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_33jn1"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ukmgj"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_dc6g2"]
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j2buf"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_w03mq")
+nodes/Animation/position = Vector2(20, 420)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_wrh2e")
+"nodes/Animation 2/position" = Vector2(-20, 60)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_n5hpx")
+"nodes/Animation 3/position" = Vector2(-200, 240)
+nodes/Shoot/node = SubResource("AnimationNodeOneShot_8uf1h")
+nodes/Shoot/position = Vector2(420, 220)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ukmgj")
+nodes/TimeScale/position = Vector2(0, 240)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_33jn1")
+"nodes/TimeScale 2/position" = Vector2(220, 340)
+nodes/Transition/node = SubResource("AnimationNodeTransition_dc6g2")
+nodes/Transition/position = Vector2(200, 80)
+nodes/output/position = Vector2(680, 180)
+node_connections = [&"Shoot", 0, &"Transition", &"Shoot", 1, &"TimeScale 2", &"TimeScale", 0, &"Animation 3", &"TimeScale 2", 0, &"Animation", &"Transition", 0, &"Animation 2", &"Transition", 1, &"TimeScale", &"output", 0, &"Shoot"]
+
+[node name="EnemyClassB" type="CharacterBody3D" node_paths=PackedStringArray("shoot", "agent") groups=["Entity"]]
+script = ExtResource("1_h80rg")
+shoot = NodePath("ComponentShoot")
+agent = NodePath("ComponentAgentClassB")
+
+[node name="ComponentHurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_u2oc4")]
+health = NodePath("")
+
+[node name="CollisionShape3D" parent="ComponentHurtBox/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0841691, 0.0153838)
+shape = SubResource("BoxShape3D_fa2kk")
+
+[node name="ComponentShoot" parent="." instance=ExtResource("4_lhae7")]
+
+[node name="Marker3D" parent="ComponentShoot" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.191142, 1.19209e-07, 0.275142)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0943703, 0)
+shape = SubResource("BoxShape3D_46ofe")
+
+[node name="EnemyClassB" parent="." instance=ExtResource("6_5s3u3")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Skeleton3D" parent="EnemyClassB/Armature" index="0"]
+bones/0/position = Vector3(1.98158e-08, -0.223557, 0.0179862)
+bones/1/rotation = Quaternion(0.021384, 0, 0, 0.999771)
+bones/2/rotation = Quaternion(0.508013, -0.445586, -0.550068, 0.490715)
+bones/3/position = Vector3(0.176917, -0.0394448, -7.05538e-08)
+bones/3/rotation = Quaternion(0.000100418, -0.00644034, 0.999857, 0.0156149)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(0.508013, 0.445586, 0.550068, 0.490715)
+bones/5/position = Vector3(-0.176917, -0.0394448, -7.05538e-08)
+bones/5/rotation = Quaternion(0.000221943, 0.0142011, 0.999777, -0.0156136)
+bones/5/scale = Vector3(1, 1, 1)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="EnemyClassB/Armature/Skeleton3D" index="1"]
+transform = Transform3D(-0.00224352, 0.087127, -0.996195, -0.99258, -0.121305, -0.00837401, -0.121573, 0.988784, 0.0867527, 0.298067, 0.133988, 0.0179862)
+bone_name = "Arm.L"
+bone_idx = 2
+
+[node name="blasterA2" parent="EnemyClassB/Armature/Skeleton3D/BoneAttachment3D" instance=ExtResource("8_gme7l")]
+transform = Transform3D(-0.00224349, -0.983052, -0.183312, 0.0871273, -0.182807, 0.979281, -0.996195, -0.0137745, 0.0860607, -0.0738899, 0.432441, -0.0348778)
+
+[node name="ComponentAgentClassB" parent="." node_paths=PackedStringArray("character", "shoot", "health") instance=ExtResource("4_s2xdt")]
+character = NodePath("..")
+shoot = NodePath("../ComponentShoot")
+health = NodePath("")
+
+[node name="CollisionShape3D" parent="ComponentAgentClassB/VisionArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+shape = SubResource("CylinderShape3D_5rkd1")
+
+[node name="CollisionShape3D" parent="ComponentAgentClassB/AtakArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80159, 0)
+shape = SubResource("CylinderShape3D_skyet")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+emitting = false
+fixed_fps = 30
+mesh = SubResource("SphereMesh_4r42x")
+direction = Vector3(1, 0, -10)
+gravity = Vector3(0, -0.5, 0)
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_5ditx")
+volume_db = -15.0
+autoplay = true
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../EnemyClassB")
+tree_root = SubResource("AnimationNodeBlendTree_j2buf")
+anim_player = NodePath("../EnemyClassB/AnimationPlayer")
+parameters/Shoot/active = false
+parameters/Shoot/internal_active = false
+parameters/Shoot/request = 0
+parameters/TimeScale/scale = 2.0
+"parameters/TimeScale 2/scale" = 1.7
+parameters/Transition/current_state = "Idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0
+
+[node name="ComponentHeath" parent="." instance=ExtResource("1_5sgft")]
+
+[editable path="ComponentHurtBox"]
+[editable path="ComponentShoot"]
+[editable path="EnemyClassB"]
+[editable path="ComponentAgentClassB"]

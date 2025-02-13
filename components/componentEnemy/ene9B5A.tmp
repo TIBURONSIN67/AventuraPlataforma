@@ -1,0 +1,158 @@
+[gd_scene load_steps=21 format=3 uid="uid://b47v1wubf618"]
+
+[ext_resource type="PackedScene" uid="uid://deojidusdaioi" path="res://components/componentHealth/component_health.tscn" id="1_bg1fu"]
+[ext_resource type="Script" path="res://components/componentEnemy/enemy_class_a.gd" id="1_i2720"]
+[ext_resource type="PackedScene" uid="uid://cherfuecmgegw" path="res://components/componentHitBox/hit_box.tscn" id="3_0xyhj"]
+[ext_resource type="PackedScene" uid="uid://dn7wxoopdbwc3" path="res://components/componentHurtBox/hurt_box.tscn" id="4_0uddx"]
+[ext_resource type="PackedScene" uid="uid://r3eryohq8crl" path="res://components/componentAgent/component_agent_class_a.tscn" id="4_ca16r"]
+[ext_resource type="PackedScene" uid="uid://dvqj2ihtal0pk" path="res://components/componentEnemy/Character.glb" id="5_6nkqf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_68gic"]
+size = Vector3(0.481445, 0.860559, 0.283575)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fa2kk"]
+size = Vector3(0.283203, 0.982117, 0.224609)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_o48iq"]
+height = 1.02642
+radius = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yibfl"]
+height = 1.0
+radius = 0.3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lxftm"]
+size = Vector3(0.298828, 1.0166, 0.147461)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wrh2e"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n5hpx"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pk6fg"]
+animation = &"MeleAttack"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8uf1h"]
+filter_enabled = true
+filters = ["Armature/Skeleton3D:Arm.L", "Armature/Skeleton3D:Arm.R", "Armature/Skeleton3D:Head"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ukmgj"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_dc6g2"]
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0h2wp"]
+graph_offset = Vector2(-267, 147)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_pk6fg")
+nodes/Animation/position = Vector2(200, 340)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_wrh2e")
+"nodes/Animation 2/position" = Vector2(-20, 60)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_n5hpx")
+"nodes/Animation 3/position" = Vector2(-160, 220)
+nodes/MeleAttack/node = SubResource("AnimationNodeOneShot_8uf1h")
+nodes/MeleAttack/position = Vector2(420, 220)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ukmgj")
+nodes/TimeScale/position = Vector2(40, 200)
+nodes/Transition/node = SubResource("AnimationNodeTransition_dc6g2")
+nodes/Transition/position = Vector2(200, 80)
+nodes/output/position = Vector2(680, 180)
+node_connections = [&"MeleAttack", 0, &"Transition", &"MeleAttack", 1, &"Animation", &"TimeScale", 0, &"Animation 3", &"Transition", 0, &"Animation 2", &"Transition", 1, &"TimeScale", &"output", 0, &"MeleAttack"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tykep"]
+albedo_color = Color(0.404511, 0.404511, 0.404511, 1)
+metallic_specular = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_n241q"]
+material = SubResource("StandardMaterial3D_tykep")
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
+
+[node name="EnemyClassA" type="CharacterBody3D" node_paths=PackedStringArray("agent")]
+script = ExtResource("1_i2720")
+agent = NodePath("ComponentAgentClassA")
+
+[node name="ComponentHeath" parent="." instance=ExtResource("1_bg1fu")]
+
+[node name="ComponentHitBox" parent="." instance=ExtResource("3_0xyhj")]
+damage = 5.0
+
+[node name="CollisionShape3D" parent="ComponentHitBox/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00158695, 0.0303625, 0.270347)
+shape = SubResource("BoxShape3D_68gic")
+
+[node name="ComponentHurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_0uddx")]
+health = NodePath("../ComponentHeath")
+
+[node name="CollisionShape3D" parent="ComponentHurtBox/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.114007, 0)
+shape = SubResource("BoxShape3D_fa2kk")
+
+[node name="ComponentAgentClassA" parent="." node_paths=PackedStringArray("character", "hit_box", "health") instance=ExtResource("4_ca16r")]
+character = NodePath("..")
+hit_box = NodePath("../ComponentHitBox")
+health = NodePath("../ComponentHeath")
+
+[node name="CollisionShape3D" parent="ComponentAgentClassA/VisionArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104156, 0)
+shape = SubResource("CylinderShape3D_o48iq")
+
+[node name="CollisionShape3D" parent="ComponentAgentClassA/AtakArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0829719, 0)
+shape = SubResource("CylinderShape3D_yibfl")
+
+[node name="RaycastOrigin" parent="ComponentAgentClassA" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.473196, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000488251, 0.098672, 0)
+shape = SubResource("BoxShape3D_lxftm")
+
+[node name="Character" parent="." instance=ExtResource("5_6nkqf")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Character/Armature" index="0"]
+bones/0/position = Vector3(1.98158e-08, -0.203719, 0.0179862)
+bones/1/rotation = Quaternion(0.00214784, 0, 0, 0.999998)
+bones/2/rotation = Quaternion(0.486303, -0.468971, -0.530272, 0.512238)
+bones/3/position = Vector3(0.176917, -0.059282, -8.51486e-08)
+bones/3/rotation = Quaternion(1.15082e-05, -0.000747301, 0.999878, 0.0156152)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(0.486303, 0.468971, 0.530272, 0.512238)
+bones/5/position = Vector3(-0.176917, -0.059282, -8.51486e-08)
+bones/5/rotation = Quaternion(2.24385e-05, 0.00142638, 0.999877, -0.0156152)
+bones/5/scale = Vector3(1, 1, 1)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Character")
+tree_root = SubResource("AnimationNodeBlendTree_0h2wp")
+anim_player = NodePath("../Character/AnimationPlayer")
+parameters/MeleAttack/active = false
+parameters/MeleAttack/internal_active = false
+parameters/MeleAttack/request = 0
+parameters/TimeScale/scale = 2.0
+parameters/Transition/current_state = "Idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+emitting = false
+fixed_fps = 30
+mesh = SubResource("SphereMesh_n241q")
+direction = Vector3(1, 0, -10)
+gravity = Vector3(0, -0.5, 0)
+
+[editable path="ComponentHitBox"]
+[editable path="ComponentHurtBox"]
+[editable path="ComponentAgentClassA"]
+[editable path="Character"]
