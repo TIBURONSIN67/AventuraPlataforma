@@ -75,6 +75,5 @@ texture = ExtResource("6_jtrjx")
 
 [node name="Music" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("8_si3qm")
-bus = &"Music"
 
 [editable path="ComponentHitBox"]

@@ -6,7 +6,6 @@ extends Control
 
 @onready var music: AudioStreamPlayer2D = $Audio
 
-@onready var back_button: Button = $BoxContainer2/VBoxContainer/BackButton
 
 func _ready():
 	exit_button.button_up.connect(_on_button_exit_pressed)

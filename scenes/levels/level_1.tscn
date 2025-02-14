@@ -385,7 +385,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27.454
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27.5105, 1, -74.5426)
 
 [node name="Saw3" parent="Saws" instance=ExtResource("12_idk3v")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27.4919, 1, -78.1437)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 33.9919, 1, -78.1437)
 
 [node name="Win" parent="." instance=ExtResource("12_am27h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.59591, 0, -63.2898)

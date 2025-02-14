@@ -223,7 +223,6 @@ health = NodePath("../ComponentHeath")
 [node name="WalkAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_oxlx0")
 autoplay = true
-bus = &"Sfx"
 
 [node name="GUI_player" parent="." node_paths=PackedStringArray("health", "entity") instance=ExtResource("8_65a8g")]
 health = NodePath("../ComponentHeath")
@@ -254,7 +253,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 
 [node name="HurtAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_ni4ds")
-bus = &"Sfx"
 
 [node name="PauseUi" parent="." node_paths=PackedStringArray("health") instance=ExtResource("12_8if1n")]
 health = NodePath("../ComponentHeath")
@@ -265,11 +263,9 @@ max_health = 200.0
 
 [node name="JumpAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("10_164f3")
-bus = &"Sfx"
 
 [node name="LandAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("12_0jrdk")
-bus = &"Sfx"
 
 [node name="Character" type="Node3D" parent="."]
 
@@ -277,17 +273,17 @@ bus = &"Sfx"
 transform = Transform3D(-1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Character/character_roboot/Armature" index="0"]
-bones/0/position = Vector3(0, -0.38586, 0)
-bones/0/rotation = Quaternion(0, -0.0739296, 0, 0.997263)
-bones/2/rotation = Quaternion(0.98553, 0.153009, -0.0723727, -0.0089698)
+bones/0/position = Vector3(0, -0.343177, 0)
+bones/0/rotation = Quaternion(0, -0.00919764, 0, 0.999958)
+bones/2/rotation = Quaternion(0.99864, 0.0513255, -0.00915169, -0.000572295)
 bones/2/scale = Vector3(1, 1, 1)
-bones/3/rotation = Quaternion(-3.51931e-07, 3.86656e-08, 0.319013, 0.94775)
+bones/3/rotation = Quaternion(-1.36192e-07, 4.11769e-08, 0.124597, 0.992208)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/position = Vector3(-0.0131887, 0.397016, 2.72774e-08)
 bones/4/rotation = Quaternion(-8.4109e-08, -1.13635e-07, -0.735964, 0.67702)
-bones/5/rotation = Quaternion(0.99281, 0.0927513, -0.0750853, -0.00934542)
+bones/5/rotation = Quaternion(0.998981, 0.0440465, -0.00985167, -0.000609458)
 bones/5/scale = Vector3(1, 1, 1)
-bones/6/rotation = Quaternion(-3.52623e-07, 3.86676e-08, 0.319606, 0.94755)
+bones/6/rotation = Quaternion(-1.36224e-07, 4.12051e-08, 0.124628, 0.992204)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/position = Vector3(0.00147338, 0.395791, -5.67033e-08)
 bones/7/rotation = Quaternion(-8.4112e-08, -1.13637e-07, -0.735964, 0.67702)
@@ -315,7 +311,7 @@ health = NodePath("../ComponentHeath")
 
 [node name="Blend" parent="." node_paths=PackedStringArray("health") instance=ExtResource("14_lmjsg")]
 health = NodePath("../ComponentHeath")
-damage_amount = 0.5
+damage_amount = 0.2
 
 [editable path="ViewTp"]
 [editable path="GUI_player"]
