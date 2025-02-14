@@ -28,7 +28,7 @@ Button/styles/normal = SubResource("StyleBoxTexture_bnju3")
 Button/styles/pressed = SubResource("StyleBoxTexture_inyjn")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7q687"]
-size = Vector3(4.68726, 2.64355, 4.10059)
+size = Vector3(4.76648, 0.543945, 1.42969)
 
 [node name="Win" type="Node3D"]
 script = ExtResource("1_ha76j")

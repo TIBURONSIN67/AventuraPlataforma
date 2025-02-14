@@ -19,7 +19,6 @@ func play(audio_stream_player: AudioStreamPlayer3D):
 
 	# Configurar propiedades del nodo si es necesario
 	audio_stream_player.pitch_scale = randf_range(1, 1.3)  # Variación de pitch
-	audio_stream_player.volume_db = 10
 	# Reproducir el sonido
 	audio_stream_player.play()
 

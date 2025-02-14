@@ -7,26 +7,26 @@
 [ext_resource type="Texture2D" uid="uid://iyt6qt1uurrc" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_flat.svg" id="3_q8oy4"]
 [ext_resource type="PackedScene" uid="uid://chqvmdvctibty" path="res://scenes/UI/options.tscn" id="6_107pd"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bl86m"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n67cx"]
 texture = ExtResource("2_py3j3")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lyacx"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rbww7"]
 texture = ExtResource("3_q8oy4")
 texture_margin_left = 15.0
 texture_margin_top = 10.0
 texture_margin_right = 15.0
 texture_margin_bottom = 10.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s8i2c"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4xva6"]
 texture = ExtResource("2_py3j3")
 
 [sub_resource type="Theme" id="Theme_m1ya6"]
 default_font = ExtResource("1_lhbf5")
 default_font_size = 25
 Button/font_sizes/font_size = 30
-Button/styles/hover = SubResource("StyleBoxTexture_bl86m")
-Button/styles/normal = SubResource("StyleBoxTexture_lyacx")
-Button/styles/pressed = SubResource("StyleBoxTexture_s8i2c")
+Button/styles/hover = SubResource("StyleBoxTexture_n67cx")
+Button/styles/normal = SubResource("StyleBoxTexture_rbww7")
+Button/styles/pressed = SubResource("StyleBoxTexture_4xva6")
 
 [node name="PauseUi" type="Control"]
 process_mode = 3
@@ -43,6 +43,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -1.0
+offset_right = -24.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.701961, 0.976471, 0.662745)
@@ -109,5 +113,24 @@ text = "salir
 [node name="Options" parent="." instance=ExtResource("6_107pd")]
 visible = false
 layout_mode = 1
+
+[node name="BoxContainer2" type="BoxContainer" parent="."]
+layout_mode = 2
+offset_left = 1120.0
+offset_top = 34.0
+offset_right = 1207.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BackButton" type="Button" parent="BoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_m1ya6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Volver"
 
 [editable path="Options"]

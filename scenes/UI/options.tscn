@@ -28,11 +28,11 @@ offset_bottom = 107.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_26d0a")
-region_rect = Rect2(-0.0674629, -0.324189, 32.2624, 32.5195)
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+region_rect = Rect2(0.0843582, -0.324189, 64.0479, 64.288)
+patch_margin_left = 10
+patch_margin_top = 13
+patch_margin_right = 10
+patch_margin_bottom = 14
 
 [node name="BoxContainer" type="BoxContainer" parent="."]
 layout_mode = 1
@@ -55,7 +55,7 @@ theme_override_constants/separation = 10
 [node name="Label" type="Label" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_p4qec")
-text = "Master"
+text = "Master                                "
 
 [node name="MasterSlider" type="HSlider" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2

@@ -1,11 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cd6dx31v1uv35"]
+[gd_scene load_steps=13 format=3 uid="uid://cd6dx31v1uv35"]
 
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_4ymp3"]
 [ext_resource type="PackedScene" uid="uid://cccsytsmcp1t7" path="res://scenes/levels/level_1.tscn" id="1_18p6p"]
 [ext_resource type="Texture2D" uid="uid://mv8yqn2babwy" path="res://alpha mayoris .jpg" id="1_s0tn2"]
 [ext_resource type="PackedScene" uid="uid://cherfuecmgegw" path="res://components/componentHitBox/hit_box.tscn" id="2_kqaxi"]
 [ext_resource type="Texture2D" uid="uid://butqn01k2kwtb" path="res://Satelite.png" id="4_0xunp"]
 [ext_resource type="Texture2D" uid="uid://bt55qc37gvtn0" path="res://Nave.png" id="5_yajep"]
 [ext_resource type="Texture2D" uid="uid://biad6rgpfl2yp" path="res://luna.png" id="6_jtrjx"]
+[ext_resource type="AudioStream" uid="uid://chly6hy8l7ao7" path="res://sounds/music_level.ogg" id="8_si3qm"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4hibp"]
 panorama = ExtResource("1_s0tn2")
@@ -25,6 +27,7 @@ glow_enabled = true
 size = Vector3(1722.04, 1, 1111.1)
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_4ymp3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -69,5 +72,9 @@ transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 31.0421, -48.1195, -786.87
 gi_mode = 2
 billboard = 1
 texture = ExtResource("6_jtrjx")
+
+[node name="Music" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_si3qm")
+bus = &"Music"
 
 [editable path="ComponentHitBox"]

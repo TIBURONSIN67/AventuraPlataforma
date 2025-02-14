@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3uyyhluq4klb"]
+[gd_scene load_steps=17 format=3 uid="uid://d3uyyhluq4klb"]
 
 [ext_resource type="Script" path="res://scenes/menu.gd" id="1_h1x1j"]
 [ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="1_s5w3x"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bmafchjcxushk" path="res://roo.jpeg" id="2_t372e"]
 [ext_resource type="Texture2D" uid="uid://fi12ddqk2kgs" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_gloss.svg" id="3_hxkb2"]
 [ext_resource type="Texture2D" uid="uid://iyt6qt1uurrc" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_flat.svg" id="3_lnpdc"]
+[ext_resource type="AudioStream" uid="uid://l74tjrdlul7i" path="res://sounds/music.ogg" id="7_6aach"]
+[ext_resource type="PackedScene" uid="uid://chqvmdvctibty" path="res://scenes/UI/options.tscn" id="8_nl816"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j76oi"]
 texture = ExtResource("3_hxkb2")
@@ -27,6 +29,27 @@ Button/font_sizes/font_size = 30
 Button/styles/hover = SubResource("StyleBoxTexture_j76oi")
 Button/styles/normal = SubResource("StyleBoxTexture_qcxuv")
 Button/styles/pressed = SubResource("StyleBoxTexture_yh46n")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bl86m"]
+texture = ExtResource("3_hxkb2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lyacx"]
+texture = ExtResource("3_lnpdc")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s8i2c"]
+texture = ExtResource("3_hxkb2")
+
+[sub_resource type="Theme" id="Theme_ibebf"]
+default_font = ExtResource("1_s5w3x")
+default_font_size = 25
+Button/font_sizes/font_size = 30
+Button/styles/hover = SubResource("StyleBoxTexture_bl86m")
+Button/styles/normal = SubResource("StyleBoxTexture_lyacx")
+Button/styles/pressed = SubResource("StyleBoxTexture_s8i2c")
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -56,10 +79,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = -109.0
-offset_right = 53.0
-offset_bottom = 52.0
+offset_left = -105.0
+offset_top = -125.0
+offset_right = 105.0
+offset_bottom = 125.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_dgxa7")
@@ -98,3 +121,42 @@ theme = SubResource("Theme_gcwb7")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Salir
 "
+
+[node name="OptionsButton" type="Button" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_gcwb7")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Opciones
+"
+
+[node name="Music" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_6aach")
+bus = &"Music"
+
+[node name="Options" parent="." instance=ExtResource("8_nl816")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="BoxContainer2" type="BoxContainer" parent="."]
+offset_left = 1120.0
+offset_top = 34.0
+offset_right = 1207.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BackButton" type="Button" parent="BoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ibebf")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Volver"
+
+[editable path="Options"]

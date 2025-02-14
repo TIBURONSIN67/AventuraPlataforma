@@ -10,7 +10,6 @@ var buses = {
 	"Music": AudioServer.get_bus_index("Music"),
 	"Sfx": AudioServer.get_bus_index("Sfx")
 }
-
 func _ready():
 	for bus in buses.keys():
 		if buses[bus] != -1:  # Verifica si el bus existe
