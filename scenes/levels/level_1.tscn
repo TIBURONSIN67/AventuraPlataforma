@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cccsytsmcp1t7"]
+[gd_scene load_steps=13 format=3 uid="uid://cccsytsmcp1t7"]
 
 [ext_resource type="PackedScene" uid="uid://bemlu0oe06eug" path="res://components/componentObstacles/StaticPlatforms/platform_type.tscn" id="1_wradt"]
 [ext_resource type="PackedScene" uid="uid://dsaim3ig2mmd6" path="res://components/componentPlayer/Player.tscn" id="2_yaiwg"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c6nrw1pd8hhy0" path="res://components/componentObstacles/checkPoint/check_point.tscn" id="7_y0tdu"]
 [ext_resource type="PackedScene" uid="uid://d10q8n8mcuqg1" path="res://components/componentHealth/healer.tscn" id="8_qcngl"]
 [ext_resource type="PackedScene" uid="uid://iawj47xlfc25" path="res://components/componentObstacles/Saw/double_saw.tscn" id="11_6vuuw"]
+[ext_resource type="PackedScene" uid="uid://bx26t5detfr2k" path="res://components/componentObstacles/Win/win.tscn" id="12_am27h"]
 [ext_resource type="PackedScene" uid="uid://cfk0641u7s2br" path="res://components/componentObstacles/Saw/saw.tscn" id="12_idk3v"]
 
 [node name="Level1" type="Node3D"]
@@ -382,3 +383,11 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27.510
 
 [node name="Saw3" parent="Saws" instance=ExtResource("12_idk3v")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27.4919, 1, -78.1437)
+
+[node name="Win" parent="." instance=ExtResource("12_am27h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.59591, 0, -63.2898)
+
+[node name="CollisionShape3D" parent="Win/WinArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.254578, 0.257813, -1.15503)
+
+[editable path="Win"]

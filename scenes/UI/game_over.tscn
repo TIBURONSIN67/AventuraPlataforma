@@ -6,26 +6,26 @@
 [ext_resource type="Texture2D" uid="uid://iyt6qt1uurrc" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_flat.svg" id="3_bh8ec"]
 [ext_resource type="Texture2D" uid="uid://50vj0gofkm8n" path="res://kenney_ui-pack/Vector/Green/check_square_grey.svg" id="3_l47ka"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y21sy"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5lpdx"]
 texture = ExtResource("2_oasgl")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bnju3"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k6xmm"]
 texture = ExtResource("3_bh8ec")
 texture_margin_left = 15.0
 texture_margin_top = 10.0
 texture_margin_right = 15.0
 texture_margin_bottom = 10.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_inyjn"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bp8bb"]
 texture = ExtResource("2_oasgl")
 
 [sub_resource type="Theme" id="Theme_gxhpp"]
 default_font = ExtResource("2_0tsr1")
 default_font_size = 25
 Button/font_sizes/font_size = 30
-Button/styles/hover = SubResource("StyleBoxTexture_y21sy")
-Button/styles/normal = SubResource("StyleBoxTexture_bnju3")
-Button/styles/pressed = SubResource("StyleBoxTexture_inyjn")
+Button/styles/hover = SubResource("StyleBoxTexture_5lpdx")
+Button/styles/normal = SubResource("StyleBoxTexture_k6xmm")
+Button/styles/pressed = SubResource("StyleBoxTexture_bp8bb")
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
