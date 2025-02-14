@@ -12,5 +12,5 @@ bus/2/name = &"Sfx"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = -24.9206
+bus/2/volume_db = -15.3821
 bus/2/send = &"Master"

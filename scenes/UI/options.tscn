@@ -55,7 +55,8 @@ theme_override_constants/separation = 10
 [node name="Label" type="Label" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_p4qec")
-text = "Master                                "
+text = "Volumen general
+            "
 
 [node name="MasterSlider" type="HSlider" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2

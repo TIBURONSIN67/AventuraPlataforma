@@ -1,6 +1,10 @@
 extends Node
 
 var playing = []  # Lista de nodos actualmente reproduciendo sonidos.
+const BUS = preload("res://Bus.tres")
+
+func _ready() -> void:
+	AudioServer.set_bus_layout(BUS)
 
 func _on_stream_finished(player: AudioStreamPlayer3D):
 	# Mueve el nodo de la lista de reproducción una vez que termina

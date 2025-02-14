@@ -40,7 +40,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.1)
 
 [node name="Platform_type14" parent="Platforms/Static" instance=ExtResource("1_wradt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -20.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -20.4544)
 
 [node name="Platform_type19" parent="Platforms/Static" instance=ExtResource("1_wradt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -18)
@@ -128,16 +128,19 @@ is_falling_platform = true
 transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -7.36597, 0, -64.4845)
 
 [node name="Platform_type15" parent="Platforms/Static" instance=ExtResource("1_wradt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -23.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -22.2196)
 
 [node name="Platform_type16" parent="Platforms/Static" instance=ExtResource("1_wradt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -24.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -23.9828)
 
 [node name="Platform_type17" parent="Platforms/Static" instance=ExtResource("1_wradt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -27.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -27.5031)
+
+[node name="Platform_type43" parent="Platforms/Static" instance=ExtResource("1_wradt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -25.7463)
 
 [node name="Platform_type18" parent="Platforms/Static" instance=ExtResource("1_wradt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -29.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -29.266)
 
 [node name="Platform_type6" parent="Platforms/Static" instance=ExtResource("1_wradt")]
 transform = Transform3D(-2.18557e-08, 0, -1, 0, 1, 0, 0.5, 0, -4.37114e-08, 4.9, 0, -13.0167)

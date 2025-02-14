@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bmafchjcxushk" path="res://roo.jpeg" id="2_t372e"]
 [ext_resource type="Texture2D" uid="uid://fi12ddqk2kgs" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_gloss.svg" id="3_hxkb2"]
 [ext_resource type="Texture2D" uid="uid://iyt6qt1uurrc" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_flat.svg" id="3_lnpdc"]
-[ext_resource type="AudioStream" uid="uid://l74tjrdlul7i" path="res://sounds/music.ogg" id="7_6aach"]
+[ext_resource type="PackedScene" uid="uid://chqvmdvctibty" path="res://scenes/UI/options.tscn" id="8_nl816"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j76oi"]
 texture = ExtResource("3_hxkb2")
@@ -78,10 +78,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -68.0
-offset_right = 60.0
-offset_bottom = 68.0
+offset_left = -105.0
+offset_top = -125.0
+offset_right = 105.0
+offset_bottom = 125.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_dgxa7")
@@ -98,10 +98,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -51.5
-offset_top = -57.0
-offset_right = 51.5
-offset_bottom = 57.0
+offset_left = -74.0
+offset_top = -86.5
+offset_right = 74.0
+offset_bottom = 86.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -120,6 +120,21 @@ theme = SubResource("Theme_gcwb7")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Salir
 "
+
+[node name="OptionsButton" type="Button" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_gcwb7")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Opciones
+"
+
+[node name="Options" parent="." instance=ExtResource("8_nl816")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 
 [node name="BoxContainer2" type="BoxContainer" parent="."]
 layout_mode = 0
@@ -141,10 +156,5 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Volver"
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_6aach")
-bus = &"Music"
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[editable path="Options"]

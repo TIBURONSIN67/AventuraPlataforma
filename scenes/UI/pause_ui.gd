@@ -4,7 +4,7 @@ extends Control
 @onready var button_exit: Button = $BoxContainer/VBoxContainer/ButtonExit
 @onready var button_options: Button = $BoxContainer/VBoxContainer/ButtonOptions
 
-@onready var options: Control = $Options
+@onready var options: Options = $Options
 @onready var back_button: Button = $BoxContainer2/VBoxContainer/BackButton
 
 var is_paused: bool = false
