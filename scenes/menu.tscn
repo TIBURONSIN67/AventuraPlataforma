@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d3uyyhluq4klb"]
+[gd_scene load_steps=12 format=3 uid="uid://d3uyyhluq4klb"]
 
 [ext_resource type="Script" path="res://scenes/menu.gd" id="1_h1x1j"]
 [ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="1_s5w3x"]
@@ -28,27 +28,6 @@ Button/font_sizes/font_size = 30
 Button/styles/hover = SubResource("StyleBoxTexture_j76oi")
 Button/styles/normal = SubResource("StyleBoxTexture_qcxuv")
 Button/styles/pressed = SubResource("StyleBoxTexture_yh46n")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bl86m"]
-texture = ExtResource("3_hxkb2")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lyacx"]
-texture = ExtResource("3_lnpdc")
-texture_margin_left = 15.0
-texture_margin_top = 10.0
-texture_margin_right = 15.0
-texture_margin_bottom = 10.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s8i2c"]
-texture = ExtResource("3_hxkb2")
-
-[sub_resource type="Theme" id="Theme_ibebf"]
-default_font = ExtResource("1_s5w3x")
-default_font_size = 25
-Button/font_sizes/font_size = 30
-Button/styles/hover = SubResource("StyleBoxTexture_bl86m")
-Button/styles/normal = SubResource("StyleBoxTexture_lyacx")
-Button/styles/pressed = SubResource("StyleBoxTexture_s8i2c")
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -121,28 +100,8 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Salir
 "
 
-[node name="BoxContainer2" type="BoxContainer" parent="."]
-layout_mode = 0
-offset_left = 1120.0
-offset_top = 34.0
-offset_right = 1207.0
-offset_bottom = 89.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="BackButton" type="Button" parent="BoxContainer2/VBoxContainer"]
-layout_mode = 2
-theme = SubResource("Theme_ibebf")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Volver"
-
 [node name="Audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_6aach")
-bus = &"Music"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
