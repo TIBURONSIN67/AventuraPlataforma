@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://beg1163oyvvvc"]
+
+[ext_resource type="PackedScene" uid="uid://cherfuecmgegw" path="res://components/componentHitBox/hit_box.tscn" id="1_ol1dl"]
+[ext_resource type="Script" uid="uid://ccwx4mhrwuieg" path="res://components/componentObstacles/lacer/lacer.gd" id="1_refwf"]
+[ext_resource type="PackedScene" uid="uid://be4ruoly4qmn6" path="res://components/componentObstacles/oscillator.tscn" id="3_tl2no"]
+[ext_resource type="PackedScene" uid="uid://bja885bho55oh" path="res://components/componentObstacles/lacer/asets/Laser.glb" id="4_vsx6c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jaxmo"]
+albedo_color = Color(1, 0.054902, 0, 1)
+roughness = 0.0
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 20.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_70j8m"]
+material = SubResource("StandardMaterial3D_jaxmo")
+size = Vector3(1, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x562d"]
+size = Vector3(9.75684, 0.0947266, 0.0947266)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2i25x"]
+size = Vector3(1.95313, 1, 1)
+
+[node name="Lacer" type="Node3D" node_paths=PackedStringArray("oscillator")]
+script = ExtResource("1_refwf")
+oscillator = NodePath("Oscillator")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+collision_mask = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(9.66, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_70j8m")
+skeleton = NodePath("../..")
+
+[node name="ComponentHitBox" parent="CharacterBody3D" instance=ExtResource("1_ol1dl")]
+is_shoot = true
+damage = 1000.0
+
+[node name="CollisionShape3D" parent="CharacterBody3D/ComponentHitBox/Area3D" index="0"]
+shape = SubResource("BoxShape3D_x562d")
+
+[node name="Model" type="Node3D" parent="CharacterBody3D"]
+
+[node name="Laser" parent="CharacterBody3D/Model" instance=ExtResource("4_vsx6c")]
+transform = Transform3D(0.3, 0, 0, 0, -1.31134e-08, 0.3, 0, -0.3, -1.31134e-08, -4.8, 0, 0)
+
+[node name="Laser2" parent="CharacterBody3D/Model" instance=ExtResource("4_vsx6c")]
+transform = Transform3D(-0.3, 0, 2.62268e-08, -2.62268e-08, -1.31134e-08, -0.3, 1.14641e-15, -0.3, 1.31134e-08, 4.7, 0, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.78754, 0, 0)
+shape = SubResource("BoxShape3D_2i25x")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.71246, 0, 0)
+shape = SubResource("BoxShape3D_2i25x")
+
+[node name="Oscillator" parent="." node_paths=PackedStringArray("_character") instance=ExtResource("3_tl2no")]
+_character = NodePath("../CharacterBody3D")
+
+[editable path="CharacterBody3D/ComponentHitBox"]

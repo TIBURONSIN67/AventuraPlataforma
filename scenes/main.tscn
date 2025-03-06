@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://cd6dx31v1uv35"]
+
+[ext_resource type="PackedScene" uid="uid://cccsytsmcp1t7" path="res://scenes/levels/level_1.tscn" id="1_18p6p"]
+[ext_resource type="Texture2D" uid="uid://vpslgj7rbvjh" path="res://alpha mayoris .jpg" id="1_s0tn2"]
+[ext_resource type="Script" uid="uid://43lyed3vewvd" path="res://scenes/Main.cs" id="1_v0rlg"]
+[ext_resource type="PackedScene" uid="uid://cherfuecmgegw" path="res://components/componentHitBox/hit_box.tscn" id="2_kqaxi"]
+[ext_resource type="AudioStream" uid="uid://chly6hy8l7ao7" path="res://sounds/music_level.ogg" id="8_si3qm"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4hibp"]
+panorama = ExtResource("1_s0tn2")
+
+[sub_resource type="Sky" id="Sky_5j1db"]
+sky_material = SubResource("PanoramaSkyMaterial_4hibp")
+
+[sub_resource type="Environment" id="Environment_ffitd"]
+background_mode = 2
+background_energy_multiplier = 1.5
+sky = SubResource("Sky_5j1db")
+tonemap_mode = 2
+sdfgi_enabled = true
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0349
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1hp1k"]
+size = Vector3(1722.04, 1, 1111.1)
+
+[node name="Main" type="Node3D" node_paths=PackedStringArray("_backgroundMusic")]
+script = ExtResource("1_v0rlg")
+_backgroundMusic = NodePath("Music")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ffitd")
+
+[node name="Level1" parent="." instance=ExtResource("1_18p6p")]
+
+[node name="ComponentHitBox" parent="." instance=ExtResource("2_kqaxi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -62, 0)
+
+[node name="CollisionShape3D" parent="ComponentHitBox/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.59796, 0, 41.8002)
+shape = SubResource("BoxShape3D_1hp1k")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_si3qm")
+
+[editable path="ComponentHitBox"]

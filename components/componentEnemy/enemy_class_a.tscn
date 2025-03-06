@@ -1,0 +1,167 @@
+[gd_scene load_steps=23 format=3 uid="uid://b47v1wubf618"]
+
+[ext_resource type="PackedScene" uid="uid://deojidusdaioi" path="res://components/componentHealth/component_health.tscn" id="1_bg1fu"]
+[ext_resource type="Script" uid="uid://b5kltkasoxfgy" path="res://components/componentEnemy/enemy_class_a.gd" id="1_i2720"]
+[ext_resource type="PackedScene" uid="uid://cherfuecmgegw" path="res://components/componentHitBox/hit_box.tscn" id="3_0xyhj"]
+[ext_resource type="PackedScene" uid="uid://dn7wxoopdbwc3" path="res://components/componentHurtBox/hurt_box.tscn" id="4_0uddx"]
+[ext_resource type="PackedScene" uid="uid://r3eryohq8crl" path="res://components/componentAgent/agent_perception.tscn" id="4_ca16r"]
+[ext_resource type="PackedScene" uid="uid://dvqj2ihtal0pk" path="res://components/componentEnemy/Character.glb" id="5_6nkqf"]
+[ext_resource type="PackedScene" uid="uid://dismnbtyooc7a" path="res://components/componentAgent/agent_controller.tscn" id="7_f3mr5"]
+[ext_resource type="AudioStream" uid="uid://cydjn1ct3hps2" path="res://sounds/walking.ogg" id="7_y1p5l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_68gic"]
+size = Vector3(0.481445, 0.860559, 0.176362)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fa2kk"]
+size = Vector3(0.283203, 0.982117, 0.224609)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wrh2e"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n5hpx"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pk6fg"]
+animation = &"MeleAttack"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8uf1h"]
+filter_enabled = true
+filters = ["Armature/Skeleton3D:Arm.L", "Armature/Skeleton3D:Arm.R", "Armature/Skeleton3D:Head"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ukmgj"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_dc6g2"]
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0h2wp"]
+graph_offset = Vector2(-253, 59)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_pk6fg")
+nodes/Animation/position = Vector2(200, 340)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_wrh2e")
+"nodes/Animation 2/position" = Vector2(-20, 60)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_n5hpx")
+"nodes/Animation 3/position" = Vector2(-160, 220)
+nodes/MeleAttack/node = SubResource("AnimationNodeOneShot_8uf1h")
+nodes/MeleAttack/position = Vector2(420, 220)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ukmgj")
+nodes/TimeScale/position = Vector2(40, 200)
+nodes/Transition/node = SubResource("AnimationNodeTransition_dc6g2")
+nodes/Transition/position = Vector2(200, 80)
+nodes/output/position = Vector2(680, 180)
+node_connections = [&"MeleAttack", 0, &"Transition", &"MeleAttack", 1, &"Animation", &"TimeScale", 0, &"Animation 3", &"Transition", 0, &"Animation 2", &"Transition", 1, &"TimeScale", &"output", 0, &"MeleAttack"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3g2s"]
+albedo_color = Color(0.404511, 0.404511, 0.404511, 1)
+metallic_specular = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_n241q"]
+material = SubResource("StandardMaterial3D_j3g2s")
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_53puh"]
+height = 1.0
+radius = 0.3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tiuyv"]
+radius = 6.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6i5a6"]
+size = Vector3(0.293945, 0.787109, 0.26416)
+
+[node name="EnemyClassA" type="CharacterBody3D" node_paths=PackedStringArray("health", "agent_controller") groups=["Entity"]]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_i2720")
+health = NodePath("ComponentHeath")
+agent_controller = NodePath("AgentController")
+
+[node name="ComponentHitBox" parent="." instance=ExtResource("3_0xyhj")]
+
+[node name="CollisionShape3D" parent="ComponentHitBox/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00158695, 0.0303625, 0.216741)
+shape = SubResource("BoxShape3D_68gic")
+
+[node name="ComponentHurtBox" parent="." node_paths=PackedStringArray("health", "character") instance=ExtResource("4_0uddx")]
+health = NodePath("../ComponentHeath")
+character = NodePath("..")
+
+[node name="CollisionShape3D" parent="ComponentHurtBox/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.114007, 0)
+shape = SubResource("BoxShape3D_fa2kk")
+
+[node name="Character" parent="." instance=ExtResource("5_6nkqf")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Character/Armature" index="0"]
+bones/0/position = Vector3(1.98158e-08, -0.219337, 0.0179862)
+bones/1/rotation = Quaternion(0.0172923, 0, 0, 0.999851)
+bones/2/rotation = Quaternion(0.503471, -0.450633, -0.545941, 0.495374)
+bones/3/position = Vector3(0.176917, -0.0436644, -8.28046e-08)
+bones/3/rotation = Quaternion(8.13278e-05, -0.00521799, 0.999865, 0.015615)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(0.503471, 0.450633, 0.545941, 0.495374)
+bones/5/position = Vector3(-0.176917, -0.0436644, -8.28045e-08)
+bones/5/rotation = Quaternion(0.000179506, 0.0114838, 0.999812, -0.0156142)
+bones/5/scale = Vector3(1, 1, 1)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Character")
+tree_root = SubResource("AnimationNodeBlendTree_0h2wp")
+anim_player = NodePath("../Character/AnimationPlayer")
+parameters/MeleAttack/active = false
+parameters/MeleAttack/internal_active = false
+parameters/MeleAttack/request = 0
+parameters/TimeScale/scale = 2.0
+parameters/Transition/current_state = "Idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+emitting = false
+fixed_fps = 30
+mesh = SubResource("SphereMesh_n241q")
+direction = Vector3(1, 0, -10)
+gravity = Vector3(0, -0.5, 0)
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_y1p5l")
+volume_db = -15.0
+autoplay = true
+
+[node name="ComponentHeath" parent="." instance=ExtResource("1_bg1fu")]
+
+[node name="AgentController" parent="." node_paths=PackedStringArray("character", "agent_perception", "hit_box") instance=ExtResource("7_f3mr5")]
+character = NodePath("..")
+agent_perception = NodePath("../AgentPerception")
+hit_box = NodePath("../ComponentHitBox")
+
+[node name="AgentPerception" parent="." instance=ExtResource("4_ca16r")]
+
+[node name="CollisionShape3D" parent="AgentPerception/AttackArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.102449, 0)
+shape = SubResource("CylinderShape3D_53puh")
+
+[node name="CollisionShape3D" parent="AgentPerception/VisionArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("CylinderShape3D_tiuyv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0181509)
+shape = SubResource("BoxShape3D_6i5a6")
+
+[editable path="ComponentHitBox"]
+[editable path="ComponentHurtBox"]
+[editable path="Character"]
+[editable path="AgentController"]
+[editable path="AgentPerception"]

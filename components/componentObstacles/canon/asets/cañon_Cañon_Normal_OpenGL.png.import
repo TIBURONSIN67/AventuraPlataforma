@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://od8jgmnuby1k"
+path.s3tc="res://.godot/imported/cañon_Cañon_Normal_OpenGL.png-95793a737159d4f455d29fc029f71e99.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "645854b37e2b9219b9d732260671c0e3"
+}
+
+[deps]
+
+source_file="res://components/componentObstacles/canon/asets/cañon_Cañon_Normal_OpenGL.png"
+dest_files=["res://.godot/imported/cañon_Cañon_Normal_OpenGL.png-95793a737159d4f455d29fc029f71e99.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://components/componentObstacles/asets/cañon_Cañon_Normal_OpenGL.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

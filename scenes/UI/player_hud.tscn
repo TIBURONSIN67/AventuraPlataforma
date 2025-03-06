@@ -1,0 +1,112 @@
+[gd_scene load_steps=15 format=3 uid="uid://cq2f4ipfimg0h"]
+
+[ext_resource type="Script" uid="uid://wwtq6n7g1xiu" path="res://scenes/UI/PlayerHud.cs" id="1_3ypus"]
+[ext_resource type="Texture2D" uid="uid://c5le5hb3tpjf3" path="res://kenney_ui-pack/Vector/Green/button_round_depth_border.svg" id="2_al7vv"]
+[ext_resource type="Texture2D" uid="uid://bhepk70yr8f3" path="res://kenney_ui-pack/Vector/Green/button_round_depth_line.svg" id="3_evg31"]
+[ext_resource type="Texture2D" uid="uid://bvm642ry5wuqd" path="res://kenney_ui-pack/PNG/Blue/Double/button_round_border.png" id="4_2y8ia"]
+[ext_resource type="Texture2D" uid="uid://dk11m0aaq4b3r" path="res://kenney_ui-pack/Vector/Red/button_rectangle_depth_gradient.svg" id="5_ggbvd"]
+[ext_resource type="Texture2D" uid="uid://iyt6qt1uurrc" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_flat.svg" id="6_bdaoo"]
+[ext_resource type="Texture2D" uid="uid://fi12ddqk2kgs" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_gloss.svg" id="7_btsl3"]
+[ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="8_v8ehj"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="9_dcd40"]
+[ext_resource type="PackedScene" uid="uid://dn4t4pac216ys" path="res://scenes/UI/pause_menu.tscn" id="10_4xavj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7pbfo"]
+texture = ExtResource("7_btsl3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cttj5"]
+texture = ExtResource("6_bdaoo")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_82bfu"]
+texture = ExtResource("7_btsl3")
+
+[sub_resource type="Theme" id="Theme_0ar1n"]
+default_font = ExtResource("8_v8ehj")
+default_font_size = 25
+Button/font_sizes/font_size = 30
+Button/styles/hover = SubResource("StyleBoxTexture_7pbfo")
+Button/styles/normal = SubResource("StyleBoxTexture_cttj5")
+Button/styles/pressed = SubResource("StyleBoxTexture_82bfu")
+
+[node name="PlayerHud" type="Control" node_paths=PackedStringArray("_virtualJoystick", "_hBoxContainer", "_hBoxContainer2", "_jump", "_attackMelee", "_healthProgressBar", "_buttonPause")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3ypus")
+_virtualJoystick = NodePath("HBoxContainer/Virtual Joystick")
+_hBoxContainer = NodePath("HBoxContainer")
+_hBoxContainer2 = NodePath("HBoxContainer")
+_jump = NodePath("HBoxContainer2/Jump")
+_attackMelee = NodePath("HBoxContainer2/AttackMele")
+_healthProgressBar = NodePath("HealthProgressBar")
+_buttonPause = NodePath("ButtonPause")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -650.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+
+[node name="Jump" type="TouchScreenButton" parent="HBoxContainer2"]
+position = Vector2(341, 278)
+scale = Vector2(2, 2)
+texture_normal = ExtResource("2_al7vv")
+texture_pressed = ExtResource("3_evg31")
+action = "jump"
+
+[node name="AttackMele" type="TouchScreenButton" parent="HBoxContainer2"]
+position = Vector2(113, 432)
+scale = Vector2(0.7, 0.7)
+texture_normal = ExtResource("4_2y8ia")
+action = "Mele"
+
+[node name="HealthProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 28.0
+offset_right = 216.0
+offset_bottom = 92.0
+value = 100.0
+texture_under = ExtResource("5_ggbvd")
+texture_progress = ExtResource("6_bdaoo")
+
+[node name="ButtonPause" type="Button" parent="."]
+layout_mode = 0
+offset_left = 993.0
+offset_top = 28.0
+offset_right = 1099.0
+offset_bottom = 83.0
+theme = SubResource("Theme_0ar1n")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Pause"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -400.0
+offset_right = 400.0
+grow_vertical = 0
+
+[node name="Virtual Joystick" parent="HBoxContainer" instance=ExtResource("9_dcd40")]
+layout_mode = 2
+joystick_mode = 1
+visibility_mode = 1
+
+[node name="PauseUi" parent="." instance=ExtResource("10_4xavj")]
+layout_mode = 1

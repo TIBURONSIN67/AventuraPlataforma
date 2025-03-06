@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkr7wat3ti576"]
+
+[ext_resource type="PackedScene" uid="uid://uqr4hswv6d2g" path="res://objects/platform_grass_large_round.tscn" id="1_bbjfx"]
+[ext_resource type="PackedScene" uid="uid://dwotf35tu4lvi" path="res://scenes/itemsScene/door_key.tscn" id="2_4aeie"]
+[ext_resource type="PackedScene" uid="uid://dfpisimsgf5ce" path="res://objects/coin.tscn" id="3_fuout"]
+[ext_resource type="PackedScene" uid="uid://cxtcmsa6gtfan" path="res://scenes/itemsScene/mobile_platform.tscn" id="4_x5duj"]
+[ext_resource type="PackedScene" uid="uid://c3xujc4pcfl1j" path="res://scenes/itemsScene/button_toggle_platform.tscn" id="5_wwp5g"]
+
+[node name="World" type="Node3D"]
+
+[node name="platform-grass-large-round" parent="." instance=ExtResource("1_bbjfx")]
+
+[node name="DoorKey" parent="." instance=ExtResource("2_4aeie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.45797, 1.3987, 5.11935)
+
+[node name="coin" parent="." instance=ExtResource("3_fuout")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58679, 0)
+
+[node name="MobilePlatform" parent="." node_paths=PackedStringArray("activator_node") instance=ExtResource("4_x5duj")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.939127, 5.21534)
+activator_node = NodePath("../ButtonTogglePlatform")
+direction = null
+initial_direction = null
+
+[node name="MobilePlatform2" parent="." node_paths=PackedStringArray("activator_node") instance=ExtResource("4_x5duj")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 4.07075, 0.939127, -4.32452)
+activator_node = NodePath("../ButtonTogglePlatform2")
+direction = null
+
+[node name="ButtonTogglePlatform" parent="." instance=ExtResource("5_wwp5g")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.470124, 0)
+
+[node name="ButtonTogglePlatform2" parent="." instance=ExtResource("5_wwp5g")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.97321, 0.470124, 0)

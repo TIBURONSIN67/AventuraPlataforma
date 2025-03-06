@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn7wxoopdbwc3"]
+
+[ext_resource type="Script" uid="uid://bbhmb0foae7uh" path="res://components/componentHurtBox/HurtBox.cs" id="1_um8e2"]
+
+[node name="ComponentHurtBox" type="Node3D"]
+script = ExtResource("1_um8e2")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]

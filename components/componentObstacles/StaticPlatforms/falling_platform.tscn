@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlvgkjf3d7yet"]
+
+[ext_resource type="Script" uid="uid://dmugx70esgjjs" path="res://components/componentObstacles/StaticPlatforms/falling_platform.gd" id="1_q1lgm"]
+[ext_resource type="AudioStream" uid="uid://cko3em7xury11" path="res://sounds/fall.ogg" id="2_7bt84"]
+
+[node name="FallingPlatform" type="Node3D"]
+script = ExtResource("1_q1lgm")
+
+[node name="TriggerArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+
+[node name="TimerFall" type="Timer" parent="."]
+
+[node name="TimerDestroy" type="Timer" parent="."]
+
+[node name="AudioFall" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_7bt84")

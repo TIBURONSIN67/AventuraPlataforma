@@ -1,0 +1,117 @@
+[gd_scene load_steps=11 format=3 uid="uid://dn4t4pac216ys"]
+
+[ext_resource type="Script" uid="uid://cg7l2an7mbnn0" path="res://scenes/UI/PauseMenu.cs" id="1_4y578"]
+[ext_resource type="Texture2D" uid="uid://50vj0gofkm8n" path="res://kenney_ui-pack/Vector/Green/check_square_grey.svg" id="2_equer"]
+[ext_resource type="Texture2D" uid="uid://fi12ddqk2kgs" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_gloss.svg" id="3_rmnvl"]
+[ext_resource type="Texture2D" uid="uid://iyt6qt1uurrc" path="res://kenney_ui-pack/Vector/Blue/button_rectangle_flat.svg" id="4_sjdnu"]
+[ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="5_qjcgt"]
+[ext_resource type="PackedScene" uid="uid://chqvmdvctibty" path="res://scenes/UI/options.tscn" id="6_e35ox"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7m0el"]
+texture = ExtResource("3_rmnvl")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gyyh4"]
+texture = ExtResource("4_sjdnu")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eof32"]
+texture = ExtResource("3_rmnvl")
+
+[sub_resource type="Theme" id="Theme_m1ya6"]
+default_font = ExtResource("5_qjcgt")
+default_font_size = 25
+Button/font_sizes/font_size = 30
+Button/styles/hover = SubResource("StyleBoxTexture_7m0el")
+Button/styles/normal = SubResource("StyleBoxTexture_gyyh4")
+Button/styles/pressed = SubResource("StyleBoxTexture_eof32")
+
+[node name="PauseUi" type="Control" node_paths=PackedStringArray("_buttonResume", "_buttonExit", "_buttonOptions", "_options", "_backButton")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4y578")
+_buttonResume = NodePath("BoxContainer/VBoxContainer/ButtonResume")
+_buttonExit = NodePath("BoxContainer/VBoxContainer/ButtonExit")
+_buttonOptions = NodePath("BoxContainer/VBoxContainer/ButtonOptions")
+_options = NodePath("Options")
+_backButton = NodePath("Options/BoxContainer2/VBoxContainer/BackButton")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.701961, 0.976471, 0.662745)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.0
+offset_top = -107.0
+offset_right = 87.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_equer")
+region_rect = Rect2(-0.0674629, -0.324189, 32.2624, 32.5195)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -92.5
+offset_right = 74.0
+offset_bottom = 92.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ButtonResume" type="Button" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_m1ya6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "resume"
+
+[node name="ButtonOptions" type="Button" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_m1ya6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Opciones
+"
+
+[node name="ButtonExit" type="Button" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_m1ya6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "salir
+"
+
+[node name="Options" parent="." instance=ExtResource("6_e35ox")]
+layout_mode = 1
+
+[editable path="Options"]

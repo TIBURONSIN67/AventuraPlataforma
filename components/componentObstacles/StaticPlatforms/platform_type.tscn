@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bemlu0oe06eug"]
+
+[ext_resource type="PackedScene" uid="uid://dlvgkjf3d7yet" path="res://components/componentObstacles/StaticPlatforms/falling_platform.tscn" id="1_oisdp"]
+[ext_resource type="Script" uid="uid://bfp2ry7vvxa42" path="res://components/componentObstacles/StaticPlatforms/platform_type.gd" id="1_t30pw"]
+[ext_resource type="PackedScene" uid="uid://bjwh7hssb2cdj" path="res://components/componentObstacles/StaticPlatforms/asets/plataforma estandar.glb" id="2_5u8dg"]
+[ext_resource type="PackedScene" uid="uid://fr1xmt03fdqg" path="res://components/componentObstacles/StaticPlatforms/asets/plataforma que cae.glb" id="3_jem2p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rs5y7"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0qm1o"]
+size = Vector3(2.1, 0.4, 2.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gro26"]
+size = Vector3(4.84863, 0.0595703, 1.66113)
+
+[node name="Platform_type" type="Node3D" node_paths=PackedStringArray("falling_platform", "_platform")]
+script = ExtResource("1_t30pw")
+falling_platform = NodePath("FallingPlatform")
+_platform = NodePath("CharacterBody3D")
+
+[node name="FallingPlatform" parent="." node_paths=PackedStringArray("platform", "model") instance=ExtResource("1_oisdp")]
+restart_time = 3.0
+platform = NodePath("../CharacterBody3D")
+model = NodePath("../CharacterBody3D/Model")
+
+[node name="TriggerArea" parent="FallingPlatform" index="0"]
+collision_layer = 0
+collision_mask = 7
+
+[node name="CollisionShape3D" parent="FallingPlatform/TriggerArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.721094, 0)
+shape = SubResource("BoxShape3D_rs5y7")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="FallCollisionShape" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("BoxShape3D_0qm1o")
+
+[node name="Model" type="Node3D" parent="CharacterBody3D"]
+
+[node name="plataforma estandar" parent="CharacterBody3D/Model" instance=ExtResource("2_5u8dg")]
+
+[node name="plataforma que cae" parent="CharacterBody3D/Model" instance=ExtResource("3_jem2p")]
+visible = false
+
+[node name="StaticCollisionShape" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("BoxShape3D_gro26")
+
+[editable path="FallingPlatform"]

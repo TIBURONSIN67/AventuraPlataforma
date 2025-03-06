@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bnc33wk7mf0qp"
+path.s3tc="res://.godot/imported/character_roboot_Personaje_Emissive.png-55ac10c412b70d0f2b8bf390c81e3828.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "1d0265b335608b0fd4c1fb418dab1888"
+}
+
+[deps]
+
+source_file="res://components/componentPlayer/character_roboot_Personaje_Emissive.png"
+dest_files=["res://.godot/imported/character_roboot_Personaje_Emissive.png-55ac10c412b70d0f2b8bf390c81e3828.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

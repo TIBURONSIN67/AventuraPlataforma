@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://r3eryohq8crl"]
+
+[ext_resource type="Script" uid="uid://cs5cw0nl1p02q" path="res://components/componentAgent/agent_perception.gd" id="1_7jgsy"]
+
+[node name="AgentPerception" type="Node3D"]
+script = ExtResource("1_7jgsy")
+
+[node name="AttackArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.252386, 0)
+
+[node name="Raycast" type="RayCast3D" parent="."]
+top_level = true
+target_position = Vector3(0, 0, 0)
+collision_mask = 3
+
+[node name="RaycastOrigin" type="Marker3D" parent="."]
+
+[node name="VisionArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

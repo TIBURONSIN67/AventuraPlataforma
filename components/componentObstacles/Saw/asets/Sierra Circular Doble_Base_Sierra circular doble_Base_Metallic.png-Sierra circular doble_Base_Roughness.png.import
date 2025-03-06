@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dyhv3qc86yr4b"
+path.s3tc="res://.godot/imported/Sierra Circular Doble_Base_Sierra circular doble_Base_Metallic.png-Sierra circular doble_Base_Roughness.png-959eae9f8e9f89869c3b137c511f41a6.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "990aeae0c3c3e5acf60172145b1ba599"
+}
+
+[deps]
+
+source_file="res://components/componentObstacles/Saw/asets/Sierra Circular Doble_Base_Sierra circular doble_Base_Metallic.png-Sierra circular doble_Base_Roughness.png"
+dest_files=["res://.godot/imported/Sierra Circular Doble_Base_Sierra circular doble_Base_Metallic.png-Sierra circular doble_Base_Roughness.png-959eae9f8e9f89869c3b137c511f41a6.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

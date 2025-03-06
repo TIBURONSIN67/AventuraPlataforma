@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d10q8n8mcuqg1"]
+
+[ext_resource type="Script" path="res://components/componentHealth/healer.gd" id="1_1gkyy"]
+[ext_resource type="PackedScene" uid="uid://dixbuk8gho6hc" path="res://components/componentHealth/asets/Batería.glb" id="2_p7a26"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rv521"]
+size = Vector3(0.383789, 0.5625, 0.416992)
+
+[node name="Healer" type="Node3D"]
+script = ExtResource("1_1gkyy")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_rv521")
+
+[node name="Batería" parent="Area3D" instance=ExtResource("2_p7a26")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://be4ruoly4qmn6"]
+
+[ext_resource type="Script" uid="uid://c7uddsbqpys5e" path="res://oscillator.gd" id="1_u6kqe"]
+
+[node name="Oscillator" type="Node3D"]
+script = ExtResource("1_u6kqe")

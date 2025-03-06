@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://u7n4i5l50grk"]
+
+[ext_resource type="Script" uid="uid://ctjehlvuf5e15" path="res://components/componentShoot/ComponentShoot.cs" id="1_hdpwx"]
+[ext_resource type="PackedScene" uid="uid://u82juekfb32b" path="res://components/componentShoot/bullet.tscn" id="2_1goi7"]
+
+[node name="ComponentShoot" type="Node3D" node_paths=PackedStringArray("timer", "shootPoint")]
+script = ExtResource("1_hdpwx")
+BulletScene = ExtResource("2_1goi7")
+timer = NodePath("Timer")
+shootPoint = NodePath("Marker3D")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="."]

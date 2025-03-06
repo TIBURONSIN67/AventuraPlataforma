@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://iawj47xlfc25"]
+
+[ext_resource type="PackedScene" uid="uid://be4ruoly4qmn6" path="res://components/componentObstacles/oscillator.tscn" id="1_a2ddm"]
+[ext_resource type="Script" uid="uid://dc67lvfq85jvo" path="res://components/componentObstacles/Saw/double_saw.gd" id="1_qtrwp"]
+[ext_resource type="PackedScene" uid="uid://cherfuecmgegw" path="res://components/componentHitBox/hit_box.tscn" id="2_ut60j"]
+[ext_resource type="PackedScene" uid="uid://bvhffr1xqw1aa" path="res://components/componentObstacles/Saw/asets/Sierra Circular.glb" id="3_aqusv"]
+[ext_resource type="PackedScene" uid="uid://cbtxprleqox1y" path="res://components/componentObstacles/Saw/asets/Sierra Circular Doble_Base.glb" id="4_gn5ff"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d2u5i"]
+height = 0.0728772
+radius = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ruv2l"]
+height = 0.0943117
+radius = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_he12i"]
+size = Vector3(1.25977, 0.569336, 10.6279)
+
+[node name="DoubleSaw" type="Node3D" node_paths=PackedStringArray("oscillator1", "oscillator2")]
+script = ExtResource("1_qtrwp")
+oscillator1 = NodePath("Oscillator")
+oscillator2 = NodePath("Oscillator2")
+speed_saw1 = 5.0
+distance_saw1 = 6.5
+direction_saw1 = Vector3(0, 0, 1)
+speed_saw2 = 5.0
+distance_saw2 = 6.5
+
+[node name="Oscillator" parent="." node_paths=PackedStringArray("_character") instance=ExtResource("1_a2ddm")]
+_character = NodePath("../CharacterBody3D")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.6)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
+shape = SubResource("CylinderShape3D_d2u5i")
+
+[node name="ComponentHitBox" parent="CharacterBody3D" instance=ExtResource("2_ut60j")]
+is_shoot = true
+damage = 200.0
+
+[node name="CollisionShape3D" parent="CharacterBody3D/ComponentHitBox/Area3D" index="0"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_ruv2l")
+
+[node name="Sierra Circular" parent="CharacterBody3D" instance=ExtResource("3_aqusv")]
+
+[node name="Circle" parent="CharacterBody3D/Sierra Circular" index="0"]
+transform = Transform3D(-1, 1.50996e-07, 1.44049e-14, -1.50996e-07, -1, -9.5399e-08, 0, -9.5399e-08, 1, -0.0308154, 0, 0)
+
+[node name="CharacterBody3D2" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378793, 0, 0)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D2"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
+shape = SubResource("CylinderShape3D_d2u5i")
+
+[node name="ComponentHitBox" parent="CharacterBody3D2" instance=ExtResource("2_ut60j")]
+is_shoot = true
+damage = 200.0
+
+[node name="CollisionShape3D" parent="CharacterBody3D2/ComponentHitBox/Area3D" index="0"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_ruv2l")
+
+[node name="Sierra Circular" parent="CharacterBody3D2" instance=ExtResource("3_aqusv")]
+
+[node name="Circle" parent="CharacterBody3D2/Sierra Circular" index="0"]
+transform = Transform3D(-1, 1.50996e-07, 1.44049e-14, -1.50996e-07, -1, -9.5399e-08, 0, -9.5399e-08, 1, -0.0308154, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.3062)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.161102, -0.0506539, 0)
+shape = SubResource("BoxShape3D_he12i")
+
+[node name="Model" type="Node3D" parent="StaticBody3D"]
+
+[node name="Sierra Circular Doble_Base" parent="StaticBody3D/Model" instance=ExtResource("4_gn5ff")]
+transform = Transform3D(1, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="Oscillator2" parent="." node_paths=PackedStringArray("_character") instance=ExtResource("1_a2ddm")]
+_character = NodePath("../CharacterBody3D2")
+
+[editable path="CharacterBody3D/ComponentHitBox"]
+[editable path="CharacterBody3D/Sierra Circular"]
+[editable path="CharacterBody3D2/ComponentHitBox"]
+[editable path="CharacterBody3D2/Sierra Circular"]

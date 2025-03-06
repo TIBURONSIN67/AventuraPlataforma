@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://cagib2u4d65b1"]
+
+[ext_resource type="PackedScene" uid="uid://c60tfmehc0fc6" path="res://components/componentObstacles/Saw/asets/sierra giratoria.glb" id="1_8y446"]
+[ext_resource type="Script" uid="uid://nr4plqq2m4ta" path="res://components/componentObstacles/Saw/rotating_saw.gd" id="1_35y4w"]
+[ext_resource type="PackedScene" uid="uid://cherfuecmgegw" path="res://components/componentHitBox/hit_box.tscn" id="3_vm7rw"]
+[ext_resource type="PackedScene" uid="uid://be4ruoly4qmn6" path="res://components/componentObstacles/oscillator.tscn" id="4_q8q5p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m5wre"]
+size = Vector3(0.870605, 0.191162, 7.09741)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_shwi5"]
+size = Vector3(1.1853, 0.0310059, 7.2749)
+
+[node name="RotatinSaw" type="Node3D" node_paths=PackedStringArray("character")]
+script = ExtResource("1_35y4w")
+character = NodePath("CharacterBody3D")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000732422, 0.0612885, -0.0140378)
+shape = SubResource("BoxShape3D_m5wre")
+
+[node name="Model" type="Node3D" parent="CharacterBody3D"]
+
+[node name="sierra giratoria" parent="CharacterBody3D/Model" instance=ExtResource("1_8y446")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="ComponentHitBox" parent="CharacterBody3D" instance=ExtResource("3_vm7rw")]
+
+[node name="CollisionShape3D" parent="CharacterBody3D/ComponentHitBox/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0020752, 0.0618158, -0.057373)
+shape = SubResource("BoxShape3D_shwi5")
+
+[node name="Oscillator" parent="." node_paths=PackedStringArray("_character") instance=ExtResource("4_q8q5p")]
+_character = NodePath("../CharacterBody3D")
+
+[editable path="CharacterBody3D/Model/sierra giratoria"]
+[editable path="CharacterBody3D/ComponentHitBox"]

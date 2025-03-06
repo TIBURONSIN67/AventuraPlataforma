@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://4jw5wpaxp0e8"]
+
+[ext_resource type="Script" uid="uid://biwnolc7eguc6" path="res://components/componentHealth/Blend.cs" id="1_d0jxk"]
+
+[node name="Blend" type="Node3D" node_paths=PackedStringArray("_timer")]
+script = ExtResource("1_d0jxk")
+_timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

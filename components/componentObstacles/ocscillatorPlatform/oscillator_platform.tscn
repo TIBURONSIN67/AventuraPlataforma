@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://6uc41e7ica5h"]
+
+[ext_resource type="Script" uid="uid://bomw0362b3mme" path="res://components/componentObstacles/ocscillatorPlatform/oscillator_platform.gd" id="1_ae4ce"]
+[ext_resource type="PackedScene" uid="uid://be4ruoly4qmn6" path="res://components/componentObstacles/oscillator.tscn" id="2_2qn18"]
+[ext_resource type="PackedScene" uid="uid://cr5an7ijrry5x" path="res://components/componentObstacles/ocscillatorPlatform/aset/oscillator_model_platform.glb" id="2_hgayk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_70a7d"]
+size = Vector3(3.3, 0.3, 2)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b3eac"]
+animation = &"Cylinder_001Action"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ob6v3"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_jruiq"]
+graph_offset = Vector2(-339, 35)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_b3eac")
+nodes/Animation/position = Vector2(-100, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ob6v3")
+nodes/TimeScale/position = Vector2(192, 181)
+nodes/output/position = Vector2(420, 160)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[node name="OscillatorPlatform" type="Node3D" node_paths=PackedStringArray("oscillator")]
+script = ExtResource("1_ae4ce")
+oscillator = NodePath("Oscillator")
+
+[node name="Oscillator" parent="." node_paths=PackedStringArray("_character") instance=ExtResource("2_2qn18")]
+_character = NodePath("../CharacterBody3D")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.102148, 0)
+shape = SubResource("BoxShape3D_70a7d")
+
+[node name="Model" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="oscillator_model_platform" parent="CharacterBody3D/Model" instance=ExtResource("2_hgayk")]
+
+[node name="Cylinder_001" parent="CharacterBody3D/Model/oscillator_model_platform" index="1"]
+transform = Transform3D(-0.345883, 0, 0.22248, 0, 0.411257, 0, -0.22248, 0, -0.345883, -0.0267254, -1.39544, -0.00597958)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../CharacterBody3D/Model/oscillator_model_platform")
+tree_root = SubResource("AnimationNodeBlendTree_jruiq")
+anim_player = NodePath("../CharacterBody3D/Model/oscillator_model_platform/AnimationPlayer")
+parameters/TimeScale/scale = 1.5
+
+[editable path="CharacterBody3D/Model/oscillator_model_platform"]
